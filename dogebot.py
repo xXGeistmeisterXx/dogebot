@@ -9,7 +9,7 @@ client = discord.Client()
 keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 
-def async run(message, command):
+async def run(message, command):
     
     now = time.strftime('%H:%M %m/%d/%Y')
     print("[%s] %s activated %s (%s)" % (now, message.author.name, command["name"], message.guild.name))
