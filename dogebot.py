@@ -9,7 +9,7 @@ client = discord.Client()
 keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 
-def run(message, command):
+def async run(message, command):
     
     now = time.strftime('%H:%M %m/%d/%Y')
     print("[%s] %s activated %s (%s)" % (now, message.author.name, command["name"], message.guild.name))
@@ -18,7 +18,7 @@ def run(message, command):
     if(command["type"] == "file"):
         
         myfile = discord.File(command["content"], filename=command["content"])
-        #await message.channel.send(file=myfile)
+        await message.channel.send(file=myfile)
         
     elif(command["type"] == "text"):
         
