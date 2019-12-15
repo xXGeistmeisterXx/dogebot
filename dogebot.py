@@ -17,16 +17,16 @@ def run(message, command):
     
     if(command["type"] == "file"):
         
-        myfile = discord.File(message["content"], filename=message["content"])
+        myfile = discord.File(command["content"], filename=command["content"])
         await message.channel.send(file=myfile)
         
     elif(command["type"] == "text"):
         
-        await message.channel.send(message["content"])
+        await message.channel.send(command["content"])
         
     elif(command["type"] == "reaction"):
         
-        for emoji in message["content"]:
+        for emoji in command["content"]:
             
             await message.add_reaction(emjoi)
         
@@ -34,13 +34,13 @@ def run(message, command):
         
         result = ""
         
-        for index in message["content"][1]:
+        for index in command["content"][1]:
             
-            message["content"][0][index] = eval(message["content"][0][index])
+            command["content"][0][index] = eval(message["content"][0][index])
             
         for index in message["content"][2]:
             
-            result = result + str(message["content"][0][index])
+            result = result + str(command["content"][0][index])
             
         await message.channel.send("result")
         
