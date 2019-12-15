@@ -17,8 +17,8 @@ def run(message, command):
     
     if(command["type"] == "file"):
         
-        file = discord.File(message["content"], filename=message["content"])
-        await message.channel.send(file=file)
+        myfile = discord.File(message["content"], filename=message["content"])
+        await message.channel.send(file=myfile)
         
     elif(command["type"] == "text"):
         
