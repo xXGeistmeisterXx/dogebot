@@ -9,7 +9,7 @@ client = discord.Client()
 keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 
-async def run(message, command):
+def run(message, command):
     
     now = time.strftime('%H:%M %m/%d/%Y')
     print("[%s] %s activated %s (%s)" % (now, message.author.name, command["name"], message.guild.name))
@@ -18,17 +18,17 @@ async def run(message, command):
     if(command["type"] == "file"):
         
         myfile = discord.File(command["content"], filename=command["content"])
-        await message.channel.send(file=myfile)
+        message.channel.send(file=myfile)
         
     elif(command["type"] == "text"):
         
-        await message.channel.send(command["content"])
+        message.channel.send(command["content"])
         
     elif(command["type"] == "reaction"):
         
         for emoji in command["content"]:
             
-            await message.add_reaction(emjoi)
+            message.add_reaction(emjoi)
         
     elif(command["type"] == "command"):
         
@@ -42,7 +42,7 @@ async def run(message, command):
             
             result = result + str(command["content"][0][index])
             
-        await message.channel.send("result")
+        message.channel.send("result")
         
 
 commands = [
@@ -246,10 +246,10 @@ async def on_message(message):
                 if(command["inside"] == True):
                     for keyword in command["keywordz"]:
                         if(keyword in message.content.lower()):
-                            run(message, command)
+                            await run(message, command)
                 else:
                     for keyword in command["keywordz"]:
                         if(keyword == message.content.lower()):
-                            run(message, command)
+                            await run(message, command)
 
 client.run(token)
