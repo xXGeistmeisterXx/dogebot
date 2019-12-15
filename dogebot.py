@@ -38,7 +38,7 @@ def run(message, command):
             
             command["content"][0][index] = eval(message["content"][0][index])
             
-        for index in message["content"][2]:
+        for index in command["content"][2]:
             
             result = result + str(command["content"][0][index])
             
