@@ -1,3 +1,4 @@
 .env
-archive/*
 .replit
+__pycache__/*
+pyproject.toml
