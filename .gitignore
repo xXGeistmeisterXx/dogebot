@@ -1,5 +1,0 @@
-.env
-.replit
-__pycache__/*
-pyproject.toml
-poetry.lock

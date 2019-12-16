@@ -19,7 +19,6 @@ def getcommands(raw):
             result = result + " - " + command["name"] + "\n"
         return(result + "```")
 
-    
 def getstats():
     result = "```dogebot stats:\n"
     result = result + " - times restarted: " + str(stats["timesrestarted"]) + "\n"
@@ -75,15 +74,17 @@ def usercommands(message, ctype):
     return("commands db updated successfully")
     
 
+
 client = discord.Client()
 keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 URL = os.environ.get("URL")
 
-#r = requests.post(url = URL + "/commands", json = jcommands)
+#r = requests.post(url = URL + "/commands", json = str(jcommands))
+#s = requests.post(url = URL + "/archive", json = str(jcommands))
 #j = requests.post(url = URL + "/stats", json = stats)
 j = requests.get(url = URL + "/stats")
-r = requests.get(url = URL + "/commands")#stress
+r = requests.get(url = URL + "/commands")
 commands = json.loads(r.json()["result"])
 stats = json.loads(j.json()["result"])
 anumres()
