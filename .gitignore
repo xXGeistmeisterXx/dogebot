@@ -2,4 +2,4 @@
 .replit
 __pycache__/*
 pyproject.toml
-poety.lock
+poetry.lock
