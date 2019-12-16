@@ -4,14 +4,89 @@ import requests
 import json
 import time
 from keep_alive import keep_alive
-    
-jcommands = r'''[{"name": "doge", "keywordz": ["doge"], "all": true, "illegal": ["dogebot"], "inside": true, "type": "file", "content": "doge.png"}, {"name": "bruh moment", "keywordz": ["bruh"], "all": true, "illegal": [], "inside": true, "type": "file", "content": "bruh.jpeg"}, {"name": "peter griffin", "keywordz": ["peter", "griffin"], "all": true, "illegal": [], "inside": true, "type": "file", "content": "petergriffin.png"}, {"name": "creeper", "keywordz": ["creeper"], "all": true, "illegal": [], "inside": true, "type": "file", "content": "creeper.jpg"}, {"name": "fur missile", "keywordz": ["fur", "missile"], "all": true, "illegal": [], "inside": true, "type": "file", "content": "furmissile.png"}, {"name": "problem", "keywordz": ["problem"], "all": true, "illegal": [], "inside": true, "type": "file", "content": "trollface.jpg"}, {"name": "bork bork nom nom", "keywordz": ["bork bork nom nom"], "all": true, "illegal": [], "inside": true, "type": "file", "content": "borkdog.jpg"}, {"name": "aw man", "keywordz": ["aw", "man"], "all": true, "illegal": [], "inside": true, "type": "text", "content": "so we back in the mine"}, {"name": "rap god", "keywordz": ["rap", "god"], "all": true, "illegal": [], "inside": true, "type": "text", "content": ">>> Dig up diamonds and craft those diamonds\nAnd make some armor, get it, baby\nGo and forge that like you so MLG pro\nThe sword's made of diamonds, so come at me, bro, huh\nTraining in your room under the torchlight\nHone that form to get you ready for the big fight\nEvery single day and the whole night\nCreeper's out prowlin', hoo, alright\nLook at me, look at you\nTake my revenge, that's what I'm gonna do\nI'm a warrior, baby, what else is new?\nAnd my blade's gonna tear through you, bring it\n**~CaptainSparklez**"}, {"name": "dab", "keywordz": ["dab"], "all": true, "illegal": [], "inside": true, "type": "text", "content": "<o/"}, {"name": "^", "keywordz": ["^"], "all": true, "illegal": [], "inside": false, "type": "text", "content": "^"}, {"name": "raider rumble", "keywordz": ["raider"], "all": true, "illegal": [], "inside": false, "type": "text", "content": "rumble"}, {"name": "welcome to Moes", "keywordz": ["welcome to"], "all": true, "illegal": [], "inside": false, "type": "text", "content": "Moes"}, {"name": "bork", "keywordz": ["bork"], "all": true, "illegal": ["nom"], "inside": true, "type": "reaction", "content": ["\ud83c\udde7", "\ud83c\uddf4", "\ud83c\uddf7", "\ud83c\uddf0"]}, {"name": "nom", "keywordz": ["nom"], "all": true, "illegal": ["bork"], "inside": true, "type": "reaction", "content": ["\ud83c\uddf3", "\ud83c\uddf4", "\ud83c\uddf2"]}, {"name": "bork nom", "keywordz": ["bork", "nom"], "all": true, "illegal": [], "inside": true, "type": "reaction", "content": ["\ud83d\udc29"]}, {"name": "yam", "keywordz": ["yam"], "all": true, "illegal": [], "inside": true, "type": "reaction", "content": ["\ud83c\udf60"]}, {"name": "eggplant", "keywordz": ["69", "420", "penis", "dick"], "all": false, "illegal": [], "inside": true, "type": "reaction", "content": ["\ud83c\udf46"]}, {"name": "@dogebot", "keywordz": ["<@612070962913083405>"], "all": true, "illegal": [], "inside": true, "type": "command", "content": [["<@", "message.author.id", ">"], [1], [0, 1, 2]]}, {"name": "help", "keywordz": ["dogebot.help", "dogebot.commands"], "all": false, "illegal": [], "inside": false, "type": "command", "content": [["getcommands()"], [0], [0]]}]'''
 
+admins = ["355803584228622346"]
+
+def getcommands(raw):
+    if(raw):
+        result = "```dogebot commands (raw):\n"
+        for command in commands:
+            result = result + str(command) + "\n"
+        return(result + "```")
+    else:
+        result = "```dogebot commands:\n"
+        for command in commands:
+            result = result + " - " + command["name"] + "\n"
+        return(result + "```")
+
+    
+def getstats():
+    result = "```dogebot stats:\n"
+    result = result + " - times restarted: " + str(stats["timesrestarted"]) + "\n"
+    result = result + " - number of messages sent: " + str(stats["messagessen"])
+    return(result + "```")
+
+def addcommand(command):
+    for ocommand in commands:
+        if(ocommand["name"] == command["name"]):
+            return()
+    commands.append(command)
+    r = requests.post(url = URL + "/commands", json = json.dumps(commands))
+
+def upcommand(command):
+    for i in range(len(commands)):
+        if(commands[i]["name"] == command["name"]):
+            commands[i] = command
+            r = requests.post(url = URL + "/commands", json = json.dumps(commands))
+            return()
+
+def delcommand(command):
+    for i in range(len(commands)):
+        if(commands[i]["name"] == command["name"]):
+            del commands[i]
+            r = requests.post(url = URL + "/commands", json = json.dumps(commands))
+    
+def anummessent():
+    stats["messagessen"] += 1
+    requests.post(url = URL + "/stats", json = json.dumps(stats))
+
+def anumres():
+    stats["timesrestarted"] += 1
+    requests.post(url = URL + "/stats", json = json.dumps(stats))
+
+def usercommands(message, ctype):
+    command = "".join(message.content.split()[1:len(message.content.split())])
+
+    if(ctype == "add"):
+        
+        addcommand(json.loads(command))
+        print("added " + json.loads(command)["name"])
+        
+    elif(ctype == "update"):
+        
+        upcommand(json.loads(command))
+        print("updated " + json.loads(command)["name"])
+        
+    elif(ctype == "delete"):
+        
+        delcommand(json.loads(command))
+        print("deleted " + json.loads(command)["name"])
+    
+    return("commands db updated successfully")
+    
 
 client = discord.Client()
 keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
-commands = json.loads(jcommands)
+URL = os.environ.get("URL")
+
+#r = requests.post(url = URL + "/commands", json = jcommands)
+#j = requests.post(url = URL + "/stats", json = stats)
+j = requests.get(url = URL + "/stats")
+r = requests.get(url = URL + "/commands")#stress
+commands = json.loads(r.json()["result"])
+stats = json.loads(j.json()["result"])
+anumres()
 
 @client.event
 async def on_message(message):
@@ -23,7 +98,7 @@ async def on_message(message):
             for illegal in command["illegal"]:
                 if illegal in message.content.lower():
                     notillegal = False
-            if(notillegal):
+            if(notillegal and ((command["admin"] and (str(message.author.id) in admins)) or (not command["admin"]))):
                 if(command["inside"]):
                     if(command["all"]):
                         check = True
@@ -43,7 +118,8 @@ async def on_message(message):
         
         if(com):
             now = time.strftime('%H:%M %m/%d/%Y')
-            #addtotalms()
+            print("[%s] (%s) %s activated %s" % (now, message.guild.name, message.author.name, com["name"]))
+            anummessent()
             
             if(com["type"] == "file"):
                 
@@ -63,14 +139,17 @@ async def on_message(message):
             elif(com["type"] == "command"):
                 
                 result = ""
+                output = {}
                 
                 for index in com["content"][1]:
                     
-                    com["content"][0][index] = eval(com["content"][0][index])
+                    output[index] = eval(com["content"][0][index])
                     
                 for index in com["content"][2]:
-                    
-                    result = result + str(com["content"][0][index])
+                    if(not(index in com["content"][1])):
+                        output[index] = com["content"][0][index]
+                        
+                    result = result + str(output[index])
                     
                 await message.channel.send(result)
                             
