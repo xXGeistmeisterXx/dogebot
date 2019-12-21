@@ -85,9 +85,26 @@ URL = os.environ.get("URL")
 #j = requests.post(url = URL + "/stats", json = stats)
 j = requests.get(url = URL + "/stats")
 r = requests.get(url = URL + "/commands")
-commands = json.loads(r.json()["result"])
-stats = json.loads(j.json()["result"])
-anumres()
+borked = False
+try:
+    commands = json.loads(r.json()["result"])
+except:
+    file = open("defaults.json", "r")
+    commands = json.loads(file.readline())
+    file.close()
+    borked = True
+
+try:
+    stats = json.loads(j.json()["result"])
+    file = open("defaults.json", "r")
+    file.readlines()
+    stats = json.loads(file.readline())
+    file.close()
+except:
+    borked = True
+
+if(not borked):
+    anumres()
 
 @client.event
 async def on_message(message):
@@ -120,7 +137,8 @@ async def on_message(message):
         if(com):
             now = time.strftime('%H:%M %m/%d/%Y')
             print("[%s] (%s) %s activated %s" % (now, message.guild.name, message.author.name, com["name"]))
-            anummessent()
+            if(not borked):
+                anummessent()
             
             if(com["type"] == "file"):
                 
