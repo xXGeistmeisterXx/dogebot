@@ -8,6 +8,8 @@ from keep_alive import keep_alive
 
 admins = ["355803584228622346"]
 
+game = "dogebot.help"
+
 def restart():
     os.execl(sys.executable, sys.executable, * sys.argv)
     return("restarting")
@@ -114,6 +116,7 @@ if(not borked):
 @client.event
 async def on_message(message):
     com = None
+    await client.change_presence(activity=discord.Game(name=game)) 
     if(not message.author.bot):
     
         for command in commands:
