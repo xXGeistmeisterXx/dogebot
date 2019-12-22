@@ -3,21 +3,24 @@ import os
 import requests
 import json
 import time
+import sys
 from keep_alive import keep_alive
 
 admins = ["355803584228622346"]
 
-def getcommands(raw):
-    if(raw):
-        result = "```dogebot commands (raw):\n"
-        for command in commands:
-            result = result + str(command) + "\n"
-        return(result + "```")
+def restart():
+  os.execl(sys.executable, sys.executable, * sys.argv)
+  return("restarting")
+
+def getcommands(offline):
+    result = ""
+    if(offline):
+        result = "```dogebot commands (offline):\n"
     else:
         result = "```dogebot commands:\n"
-        for command in commands:
-            result = result + " - " + command["name"] + "\n"
-        return(result + "```")
+    for command in commands:
+        result = result + " - " + command["name"] + "\n"
+    return(result + "```")
 
 def getstats():
     result = "```dogebot stats:\n"
@@ -76,31 +79,33 @@ def usercommands(message, ctype):
 
 
 client = discord.Client()
-keep_alive()
+#keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 URL = os.environ.get("URL")
 
-#r = requests.post(url = URL + "/commands", json = str(jcommands))
-#s = requests.post(url = URL + "/archive", json = str(jcommands))
-#j = requests.post(url = URL + "/stats", json = stats)
-j = requests.get(url = URL + "/stats")
-r = requests.get(url = URL + "/commands")
+#file = open("archive.json", "r")
+#obj = json.loads(file.readline())
+#commands = json.dumps(obj[0])
+#stats = json.dumps(obj[1])
+#file.close()
+#requests.post(url = URL + "/commands", json = str(commands))
+#requests.post(url = URL + "/stats", json = stats)
+
 borked = False
 try:
-    commands = json.loads(r.json()["result"])
+    commands = json.loads(requests.get(url = URL + "/commands").json()["result"])
 except:
     file = open("defaults.json", "r")
-    commands = json.loads(file.readline())
+    commands = json.loads(file.readline())[0]
     file.close()
     borked = True
 
 try:
-    stats = json.loads(j.json()["result"])
-    file = open("defaults.json", "r")
-    file.readlines()
-    stats = json.loads(file.readline())
-    file.close()
+    stats = json.loads(requests.get(url = URL + "/stats").json()["result"])
 except:
+    file = open("defaults.json", "r")
+    stats = json.loads(file.readline())[1]
+    file.close()
     borked = True
 
 if(not borked):
@@ -172,5 +177,4 @@ async def on_message(message):
                     
                 await message.channel.send(result)
                             
-
 client.run(token)
