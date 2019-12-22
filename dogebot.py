@@ -9,8 +9,8 @@ from keep_alive import keep_alive
 admins = ["355803584228622346"]
 
 def restart():
-  os.execl(sys.executable, sys.executable, * sys.argv)
-  return("restarting")
+    os.execl(sys.executable, sys.executable, * sys.argv)
+    return("restarting")
 
 def getcommands(offline):
     result = ""
@@ -79,7 +79,7 @@ def usercommands(message, ctype):
 
 
 client = discord.Client()
-#keep_alive()
+keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 URL = os.environ.get("URL")
 
@@ -176,5 +176,6 @@ async def on_message(message):
                     result = result + str(output[index])
                     
                 await message.channel.send(result)
-                            
+
+print("STARTED")                 
 client.run(token)
