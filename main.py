@@ -1,0 +1,2 @@
+import dogebot
+dogebot()
