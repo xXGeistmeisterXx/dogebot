@@ -14,8 +14,17 @@ def restart():
     os.execl(sys.executable, sys.executable, * sys.argv)
     return("restarting")
 
-def getcommands(offline):
+def getcommands(offline, content=None):
     result = ""
+    if(not offline and len(content.split()) > 1 and content.split()[0] in ["dogebot.help", "dogebot.commands"]):
+        com = ""
+        for i in range(len(content.split())):
+            if i > 0:
+                com = com + content.split()[i] + " "
+        for command in commands:
+            if command["name"] == com[0:len(com) - 1]:
+                return(json.dumps(command))
+        return("`COMMAND NOT FOUND`")
     if(offline):
         result = "```dogebot commands (offline):\n"
     else:
@@ -59,7 +68,9 @@ def anumres():
     requests.post(url = URL + "/stats", json = json.dumps(stats))
 
 def usercommands(message, ctype):
-    command = "".join(message.content.split()[1:len(message.content.split())])
+  
+    length = len(message.content.split()[0])
+    command = message.content[length + 1:]
 
     if(ctype == "add"):
         
