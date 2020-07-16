@@ -80,11 +80,12 @@ def run():
   app.run(host='0.0.0.0',port=5555)
 
 def keep_alive(u):
-	global key
-	global q
-	global status
-	q = u
-	t = Thread(target=run)
-	key = os.environ.get("AUTH")
-	status = True
-	t.start()
+        global key
+        global q
+        global status
+        q = u
+        t = Thread(target=run)
+        key = os.environ.get("AUTH")
+        status = True
+        t.daemon = True
+        t.start()

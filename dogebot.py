@@ -16,11 +16,11 @@ admins = ["355803584228622346"]
 game = "dogebot.help"
 
 def log(content):
-    f = open("doge.log", "a")
-	now = time.strftime('%H:%M %m/%d/%Y')
-	content = "[%s] %s\n" % (now, content)
-	f.write(content)
-	f.close()
+        f = open("doge.log", "a")
+        now = time.strftime('%H:%M %m/%d/%Y')
+        content = "[%s] %s\n" % (now, content)
+        f.write(content)
+        f.close()
 
 def getcommands(offline, content=None):
 	result = ""
@@ -190,7 +190,7 @@ async def lookformes():
 
 async def setgame():
 	await client.wait_until_ready()
-	while True:
+	while not client.is_closed():
 		await client.change_presence(activity=discord.Game(name=game))
 		await asyncio.sleep(60)
 
