@@ -16,7 +16,7 @@ admins = ["355803584228622346"]
 game = "dogebot.help"
 
 def log(content):
-	f = open("log.txt", "a")
+    f = open("doge.log", "a")
 	now = time.strftime('%H:%M %m/%d/%Y')
 	content = "[%s] %s\n" % (now, content)
 	f.write(content)
