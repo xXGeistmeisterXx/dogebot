@@ -35,8 +35,7 @@ def status():
 	else:
 		log("IFTTT GET STATUS (AUTO)")
 	sstatus = "ONLINE" if status else "OFFLINE"
-	url = "https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Original_Doge_meme.jpg/300px-Original_Doge_meme.jpg" if status else "https://www.meme-arsenal.com/memes/ba1e04fdbdc5fb5d724456b5efacb369.jpg"
-	obj = {"value1" : sstatus, "value2" : url}
+	obj = {"value1" : sstatus}
 	purl = "https://maker.ifttt.com/trigger/status/with/key/df9JDzUJhVJ52dsn5HxnUpcwOvhRWIoPJ4kY2YC3RQT"
 	r = requests.post(purl, json = obj)
 	return "yes"
@@ -54,26 +53,14 @@ def send():
 	if key == auth:
 		if prot == 1:
 			if data == "restart":
-				log("RESTARTED BY IFTTT")
-				try:
-					m.kill()
-				except:
-					pass
-				_thread.interrupt_main()
-				os.execl(sys.executable, sys.executable, * sys.argv)
+				#log("RESTARTED BY IFTTT")
+				pass
 			elif data == "stop":
-				log("STOPPED BY IFTTT")
-				status = False
-				_thread.interrupt_main()
-				try:
-					m.kill()
-				except:
-					pass
+				#log("STOPPED BY IFTTT")
+				pass
 			elif data == "start":
-				log("STARTED BY IFTTT")
-				status = True
-				m = subprocess.Popen([sys.executable, './dogebot.py'])
-				sys.exit()
+				#log("STARTED BY IFTTT")
+				pass
 		elif prot == 400:
 			ldata = data.split()
 			q.put(["find", " ".join(ldata[2:]), ldata[0], ldata[1]])
@@ -90,7 +77,7 @@ def send():
 
 
 def run():
-  app.run(host='0.0.0.0',port=8080)
+  app.run(host='0.0.0.0',port=5555)
 
 def keep_alive(u):
 	global key
