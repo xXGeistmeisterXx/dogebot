@@ -22,10 +22,6 @@ def log(content):
 	f.write(content)
 	f.close()
 
-def restart():
-	os.execl(sys.executable, sys.executable, * sys.argv)
-	return("restarting")
-
 def getcommands(offline, content=None):
 	result = ""
 	if(not offline and len(content.split()) > 1 and content.split()[0] in ["dogebot.help", "dogebot.commands"]):
@@ -59,7 +55,6 @@ def addcommand(command):
 	f = open("commands.json", "w")
 	f.write(json.dumps(commands))
 	f.close()
-	#r = requests.post(url = URL + "/commands", json = json.dumps(commands))
 
 def upcommand(command):
 	for i in range(len(commands)):
@@ -68,7 +63,6 @@ def upcommand(command):
 			f = open("commands.json", "w")
 			f.write(json.dumps(commands))
 			f.close()
-			#r = requests.post(url = URL + "/commands", json = json.dumps(commands))
 			return()
 
 def delcommand(command):
@@ -78,21 +72,18 @@ def delcommand(command):
 			f = open("commands.json", "w")
 			f.write(json.dumps(commands))
 			f.close()
-			#r = requests.post(url = URL + "/commands", json = json.dumps(commands))
-	
+
 def anummessent():
 	stats["messagessen"] += 1
 	f = open("stats.json", "w")
 	f.write(json.dumps(stats))
 	f.close()
-	#requests.post(url = URL + "/stats", json = json.dumps(stats))
 
 def anumres():
 	stats["timesrestarted"] += 1
 	f = open("stats.json", "w")
 	f.write(json.dumps(stats))
 	f.close()
-	#requests.post(url = URL + "/stats", json = json.dumps(stats))
 
 def usercommands(message, ctype):
   
@@ -165,7 +156,6 @@ client = discord.Client()
 q = Queue(maxsize = 3) 
 keep_alive(q)
 token = os.environ.get("DISCORD_BOT_SECRET")
-URL = os.environ.get("URL")
 
 file = open("commands.json", "r")
 commands = json.loads(file.readline())
@@ -173,23 +163,6 @@ file.close()
 file = open("stats.json", "r")
 stats = json.loads(file.readline())
 file.close()
-
-borked = False
-#try:
-#	commands = json.loads(requests.get(url = URL + "/commands").json()["result"])
-#except:
-#	file = open("defaults.json", "r")
-#	commands = json.loads(file.readline())[0]
-#	file.close()
-#	borked = True
-
-#try:
-#	stats = json.loads(requests.get(url = URL + "/stats").json()["result"])
-#except:
-#	file = open("defaults.json", "r")
-#	stats = json.loads(file.readline())[1]
-#	file.close()
-#	borked = True
 
 async def lookformes():
 	global client
@@ -221,8 +194,7 @@ async def setgame():
 		await client.change_presence(activity=discord.Game(name=game))
 		await asyncio.sleep(60)
 
-if(not borked):
-	anumres()
+anumres()
 
 @client.event
 async def on_message(message):
@@ -254,8 +226,7 @@ async def on_message(message):
 		if(com):
 			now = time.strftime('%H:%M %m/%d/%Y')
 			log("(%s) %s activated %s" % (message.guild.name, message.author.name, com["name"]))
-			if(not borked):
-				anummessent()
+			anummessent()
 			
 			if(com["type"] == "file"):
 				
@@ -277,7 +248,6 @@ async def on_message(message):
 				result = ""
 				output = {}
 				
-        
 
 				for index in com["content"][1]:
 					
