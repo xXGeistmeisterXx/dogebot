@@ -1,7 +1,7 @@
 [Unit]
 Description=DOGEBOT service
 [Service]
-ExecStart=DISCORD_BOT_SECRET=NjEyMDcwOTYyOTEzMDgzNDA1.XvjVDw.FuoHr2BzkX9tqivdiENxN7xs4Eg, AUTH=883191588609016 /home/lordrubixcube/dogebot/environments/dogebot/bin/python3 dogebot.py
+ExecStart=DISCORD_BOT_SECRET=NjEyMDcwOTYyOTEzMDgzNDA1.XxCWhg.PKJVCPR42QCmxpTBP-dN7osFSc4, AUTH=883191588609016 /home/lordrubixcube/dogebot/environments/dogebot/bin/python3 dogebot.py
 ExecStop=/bin/kill $MAINPID
 KillMode=process
 Restart=always
