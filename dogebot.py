@@ -4,8 +4,6 @@ import requests
 import json
 import time
 import sys
-from keep_alive import keep_alive
-from queue import Queue
 import asyncio
 import threading
 
@@ -153,8 +151,6 @@ def getscoref():
   return result + "```"
 
 client = discord.Client()
-q = Queue(maxsize = 3)
-keep_alive(q)
 f = open("token.txt", "r")
 token = f.readline()
 f.close()
@@ -167,35 +163,9 @@ file = open("stats.json", "r")
 stats = json.loads(file.readline())
 file.close()
 
-async def lookformes():
-	global client
-	await client.wait_until_ready()
-	while not client.is_closed():
-		if not q.empty():
-			arr = q.get()
-			mes = ""
-			cid = 0
-			channel = None
-			if(arr[0] == "pre"):
-				mes = arr[1].lower()
-				cid = arr[2]
-				channel = client.get_channel(cid)
-			elif(arr[0] == "find"):
-				mes = arr[1].lower()
-				channel = discord.utils.get(client.get_all_channels(), guild__name=arr[2], name=arr[3].lower())
-				if channel == None:
-					log("IFTTT channel lookup failed (%s) %s" % (arr[2], arr[3].lower()))
-			if channel != None:
-				anummessent()
-				log("(%s) IFTTT sent \"%s\" in %s" % (channel.guild.name, mes, channel.name))
-				await channel.send(mes)
-		await asyncio.sleep(5)
-
 async def setgame():
 	await client.wait_until_ready()
-	while not client.is_closed():
-		await client.change_presence(activity=discord.Game(name=game))
-		await asyncio.sleep(60)
+	await client.change_presence(activity=discord.Game(name=game))
 
 anumres()
 
@@ -265,6 +235,5 @@ async def on_message(message):
 				await message.channel.send(result)
 
 log("STARTED DOGEBOT")
-client.loop.create_task(lookformes())
 client.loop.create_task(setgame())
 client.run(token)
