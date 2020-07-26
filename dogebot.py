@@ -86,27 +86,27 @@ def anumres():
 	f.close()
 
 def usercommands(message, ctype):
-  
+
 	length = len(message.content.split()[0])
 	command = message.content[length + 1:]
 
 	if(ctype == "add"):
-		
+
 		addcommand(json.loads(command))
 		log("added " + json.loads(command)["name"])
-		
+
 	elif(ctype == "update"):
-		
+
 		upcommand(json.loads(command))
 		log("updated " + json.loads(command)["name"])
-		
+
 	elif(ctype == "delete"):
-		
+
 		delcommand(json.loads(command))
 		log("deleted " + json.loads(command)["name"])
-	
+
 	return("commands db updated successfully")
-	
+
 def changescore(name, num):
   f = open("scoreboard.json", "r")
   scoreboard = json.loads(f.readline())
@@ -153,9 +153,12 @@ def getscoref():
   return result + "```"
 
 client = discord.Client()
-q = Queue(maxsize = 3) 
+q = Queue(maxsize = 3)
 keep_alive(q)
-token = os.environ.get("DISCORD_BOT_SECRET")
+f = open("token.txt", "r")
+token = f.readline()
+f.close()
+#token = os.environ.get("DISCORD_BOT_SECRET")
 
 file = open("commands.json", "r")
 commands = json.loads(file.readline())
@@ -222,43 +225,43 @@ async def on_message(message):
 					for keyword in command["keywordz"]:
 						if(keyword == message.content.lower()):
 							com = command
-		
+
 		if(com):
 			now = time.strftime('%H:%M %m/%d/%Y')
 			log("(%s) %s activated %s" % (message.guild.name, message.author.name, com["name"]))
 			anummessent()
-			
+
 			if(com["type"] == "file"):
-				
+
 				myfile = discord.File("files/" + com["content"], filename=com["content"])
 				await message.channel.send(file=myfile)
-				
+
 			elif(com["type"] == "text"):
-				
+
 				await message.channel.send(com["content"])
-				
+
 			elif(com["type"] == "reaction"):
-				
+
 				for emoji in com["content"]:
-					
+
 					await message.add_reaction(emoji)
-				
+
 			elif(com["type"] == "command"):
-				
+
 				result = ""
 				output = {}
-				
+
 
 				for index in com["content"][1]:
-					
+
 					output[index] = eval(com["content"][0][index])
-					
+
 				for index in com["content"][2]:
 					if(not(index in com["content"][1])):
 						output[index] = com["content"][0][index]
-						
+
 					result = result + str(output[index])
-					
+
 				await message.channel.send(result)
 
 log("STARTED DOGEBOT")
