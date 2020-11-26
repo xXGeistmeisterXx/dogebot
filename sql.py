@@ -61,7 +61,7 @@ def getstats(conn):
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM commands")
 	stats = cur.fetchall()
-	return {"timesrestarted":stats[0][1], "messagessen":stats[0][1]}
+	return {"timesrestarted":int(stats[0][1]), "messagessen":int(stats[0][1])}
 
 def getstatus(conn):
 	cur = conn.cursor()
