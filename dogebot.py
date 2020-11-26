@@ -45,13 +45,16 @@ async def on_message(message):
 	com = None
 	if(not message.author.bot):
 		for command in commands:
+			print("command")
 			notillegal = True
 			for illegal in command["illegal"]:
 				if illegal in message.content.lower():
 					notillegal = False
 			if(notillegal and ((command["admin"] and (str(message.author.id) in admins)) or (not command["admin"]))):
+				print("passed admin and illegal")
 				if(command["inside"]):
 					if(command["all"]):
+						print("you are here")
 						check = True
 						for keyword in command["keywords"]:
 							if(not(keyword in message.content.lower())):
