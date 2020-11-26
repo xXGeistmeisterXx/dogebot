@@ -41,6 +41,7 @@ async def setgame():
 
 @client.event
 async def on_message(message):
+	print("hi")
 	com = None
 	if(not message.author.bot):
 		for command in commands:
