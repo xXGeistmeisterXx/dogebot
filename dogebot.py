@@ -13,20 +13,17 @@ dbfile = "db/doge.db"
 dbcc = sql.cc(dbfile)
 
 def log(content):
-        f = open("doge.log", "a")
-        now = time.strftime('%H:%M %m/%d/%Y')
-        content = "[%s] %s\n" % (now, content)
-        f.write(content)
-        f.close()
+		f = open("doge.log", "a")
+		now = time.strftime('%H:%M %m/%d/%Y')
+		content = "[%s] %s\n" % (now, content)
+		f.write(content)
+		f.close()
 
 def anummessent():
 	stats["messagessen"] += 1
 
 def anumres():
 	stats["timesrestarted"] += 1
-
-def getstats():
-    pass
 
 client = discord.Client()
 f = open("token.txt", "r")
@@ -90,7 +87,7 @@ async def on_message(message):
 					await message.add_reaction(emoji)
 
 			elif(com["type"] == "command"):
-                result = eval("functions." + str(content))
+				result = eval("functions." + str(content))
 				await message.channel.send(result)
 
 log("STARTED DOGEBOT")
