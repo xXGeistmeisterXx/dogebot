@@ -18,7 +18,7 @@ def getillegals(conn, id):
 def getpos(conn, id):
 	cur = conn.cursor()
 	cur.execute("SELECT rowid FROM corder WHERE id={}".format(id))
-	return cur.fetchall()[0] - 1
+	return cur.fetchall()[0][0] - 1
 
 def getcommands(conn):
 	cur = conn.cursor()
