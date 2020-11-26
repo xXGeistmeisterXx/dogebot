@@ -56,6 +56,7 @@ def delcommand(command):
 			f.close()
 
 def getstats(message):
+	print("got here")
 	stats = sql.getstats()
 	embed = discord.Embed(title = "dogebot stats")
 	embed.add_field(name = "messages sent", value = str(stats["messagessen"]), inline = True)
