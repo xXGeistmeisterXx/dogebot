@@ -1,3 +1,5 @@
+import sqlite3
+
 def cc(filname):
 	conn = None
 	conn = sqlite3.connect(filename)
