@@ -9,7 +9,7 @@ import functions
 
 os.system("clear")
 
-dbfile = "doge.db"
+dbfile = "db/doge.db"
 dbcc = sql.cc(dbfile)
 
 def log(content):
