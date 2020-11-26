@@ -8,7 +8,11 @@ def cc(filename):
 def getkeywords(conn, id):
 	cur = conn.cursor()
 	cur.execute("SELECT keyword FROM keywords")
-	return list(cur.fetchall()[0])
+	keywords = list(cur.fetchall())
+	output = []
+	for keyword in keywords:
+		output.append(keyword[0])
+	return output
 
 def getillegals(conn, id):
 	cur = conn.cursor()
