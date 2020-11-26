@@ -90,13 +90,13 @@ async def on_message(message):
 
 			elif(com["type"] == "embed"):
 
-				result = eval("functions." + str(content))
+				result = eval("functions." + str(com["content"]))
 				#result = functions.getstats(message, dbcc)
 				await message.channel.send(embed=result)
 
 			elif(com["type"] == "command"):
 
-				result = eval("functions." + str(content))
+				result = eval("functions." + str(com["content"]))
 				await message.channel.send(result)
 
 log("STARTED DOGEBOT")
