@@ -90,6 +90,7 @@ async def on_message(message):
 			elif(com["type"] == "embed"):
 
 				#result = eval("functions." + str(content))
+				print("embed")
 				result = functions.getstats(message)
 				await message.channel.send(embed=result)
 
