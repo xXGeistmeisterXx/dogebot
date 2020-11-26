@@ -18,7 +18,7 @@ def getillegals(conn, id):
 def getpos(conn, id):
 	cur = conn.cursor()
 	cur.execute("SELECT rowid FROM corder WHERE id={}".format(id))
-	return int(cur.fetchall()) - 1
+	return cur.fetchall()[0] - 1
 
 def getcommands(conn):
 	cur = conn.cursor()
@@ -66,4 +66,4 @@ def getstats(conn):
 def getstatus(conn):
 	cur = conn.cursor()
 	cur.execute("SELECT status FROM status")
-	return(str(cur.fetchall()))
+	return cur.fetchall()[0]
