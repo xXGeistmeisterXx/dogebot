@@ -55,9 +55,7 @@ def delcommand(command):
 			f.write(json.dumps(commands))
 			f.close()
 
-def getstats(message, conn):
-	print("got here")
-	stats = sql.getstats(conn)
+def getstats(message, stats):
 	embed = discord.Embed(title = "dogebot stats", color = discord.Color.from_rgb(209, 170, 88))
 	embed.add_field(name = "messages sent", value = str(stats["messagessen"]), inline = True)
 	embed.add_field(name = "times restarted", value = str(stats["timesrestarted"]), inline = True)
