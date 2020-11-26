@@ -63,7 +63,9 @@ def getcommands(conn):
 		obj["inside"] = bool(row[4])
 		obj["all"] = bool(row[5])
 		obj["admin"] = bool(row[6])
-		final[getpos(conn, obj["id"])] = obj
+		pos = getpos(conn, obj["id"])
+		print(pos)
+		final[pos] = obj
 
 	print(final)
 	return final
