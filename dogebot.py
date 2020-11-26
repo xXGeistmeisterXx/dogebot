@@ -31,6 +31,7 @@ token = f.readline()
 f.close()
 
 commands = sql.getcommands(dbcc)
+admins = sql.getadmins(dbcc)
 stats = sql.getstats(dbcc)
 game = sql.getstatus(dbcc)
 anumres()
@@ -92,7 +93,7 @@ async def on_message(message):
 				await message.channel.send(embed=result)
 
 			elif(com["type"] == "command"):
-				
+
 				result = eval("functions." + str(content))
 				await message.channel.send(result)
 

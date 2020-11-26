@@ -76,3 +76,12 @@ def getstatus(conn):
 	cur = conn.cursor()
 	cur.execute("SELECT status FROM status")
 	return cur.fetchall()[0][0]
+
+def getadmins(conn):
+	cur = conn.cursor()
+	cur.execute("SELECT dcid FROM admins")
+	admins = list(cur.fetchall())
+	output = []
+	for admin in admins:
+		output.append(admins[0])
+	return output
