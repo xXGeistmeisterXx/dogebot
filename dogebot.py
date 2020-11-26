@@ -53,17 +53,17 @@ async def on_message(message):
 				if(command["inside"]):
 					if(command["all"]):
 						check = True
-						for keyword in command["keywordz"]:
+						for keyword in command["keywords"]:
 							if(not(keyword in message.content.lower())):
 								check = False
 						if(check):
 							com = command
 					else:
-						for keyword in command["keywordz"]:
+						for keyword in command["keywords"]:
 							if(keyword in message.content.lower()):
 								com = command
 				else:
-					for keyword in command["keywordz"]:
+					for keyword in command["keywords"]:
 						if(keyword == message.content.lower()):
 							com = command
 
