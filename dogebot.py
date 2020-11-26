@@ -12,6 +12,10 @@ os.system("clear")
 dbfile = "db/doge.db"
 dbcc = sql.cc(dbfile)
 
+def commit():
+	dbcc.close()
+	dbcc = sql.cc(dbfile)
+
 def log(content):
 		f = open("doge.log", "a")
 		now = time.strftime('%H:%M %m/%d/%Y')
