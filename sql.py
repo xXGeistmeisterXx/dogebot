@@ -8,12 +8,12 @@ def cc(filename):
 def getkeywords(conn, id):
 	cur = conn.cursor()
 	cur.execute("SELECT keyword FROM keywords")
-	return list(cur.fetchall())
+	return list(cur.fetchall()[0])
 
 def getillegals(conn, id):
 	cur = conn.cursor()
 	cur.execute("SELECT illegal FROM illegals")
-	return list(cur.fetchall())
+	return list(cur.fetchall()[0])
 
 def getpos(conn, id):
 	cur = conn.cursor()
