@@ -58,7 +58,7 @@ def delcommand(command):
 def getstats(message, conn):
 	print("got here")
 	stats = sql.getstats(conn)
-	embed = discord.Embed(title = "dogebot stats")
+	embed = discord.Embed(title = "dogebot stats", color = "white")
 	embed.add_field(name = "messages sent", value = str(stats["messagessen"]), inline = True)
 	embed.add_field(name = "times restarted", value = str(stats["timesrestarted"]), inline = True)
 	embed.set_thumbnail(url = message.guild.me.avatar_url)

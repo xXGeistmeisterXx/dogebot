@@ -83,5 +83,5 @@ def getadmins(conn):
 	admins = list(cur.fetchall())
 	output = []
 	for admin in admins:
-		output.append(admin[0])
+		output.append(int(admin[0]))
 	return output
