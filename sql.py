@@ -93,9 +93,11 @@ def updatemessages(conn, stats):
 	cur = conn.cursor()
 	cur.execute("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))
 	conn.commit()
+	cur.close()
 
 def updaterestarts(conn, stats):
 	stats = getstats(conn)
 	cur = conn.cursor()
 	cur.execute("UPDATE stats SET restarts = {} WHERE rowid = 1;".format(stats["timesrestarted"]))
 	conn.commit()
+	cur.close()
