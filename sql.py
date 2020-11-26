@@ -55,6 +55,7 @@ def getcommands(conn):
 		obj["admin"] = bool(row[6])
 		final[getpos(conn, obj["id"])] = obj
 
+	print(final)
 	return final
 
 def getstats(conn):
