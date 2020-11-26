@@ -34,6 +34,7 @@ def getcommands(conn):
 	commands = cur.fetchall()
 	cur.execute("SELECT * FROM commands")
 	commands = cur.fetchall()
+	print(commands)
 
 	final = [None] * len(commands)
 
