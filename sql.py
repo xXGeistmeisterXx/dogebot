@@ -66,6 +66,7 @@ def getcommands(conn):
 		pos = getpos(conn, obj["id"])
 		print(pos)
 		final[pos] = obj
+		obj.del
 
 	print(final)
 	return final
