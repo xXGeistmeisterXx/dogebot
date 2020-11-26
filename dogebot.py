@@ -13,6 +13,7 @@ dbfile = "db/doge.db"
 dbcc = sql.cc(dbfile)
 
 def commit():
+	global dbcc
 	dbcc.close()
 	dbcc = sql.cc(dbfile)
 
