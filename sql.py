@@ -13,7 +13,11 @@ def getkeywords(conn, id):
 def getillegals(conn, id):
 	cur = conn.cursor()
 	cur.execute("SELECT illegal FROM illegals")
-	return list(cur.fetchall())
+	illegals = list(cur.fetchall())
+	output = []
+	for illegal in illegals:
+		output.append(illegal[0])
+	return output
 
 def getpos(conn, id):
 	cur = conn.cursor()
