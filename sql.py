@@ -34,7 +34,6 @@ def getcommands(conn):
 	commands = cur.fetchall()
 	cur.execute("SELECT * FROM commands")
 	commands = cur.fetchall()
-	print(commands)
 
 	final = [None] * len(commands)
 
@@ -53,19 +52,17 @@ def getcommands(conn):
 	nobj = {}
 
 	for row in list(commands):
-		print(row)
 		obj = nobj.copy()
 		obj["id"] = str(row[0])
 		obj["name"] = str(row[1])
 		obj["content"] = str(row[2])
 		obj["type"] = str(row[3])
-		obj["keywords"] = getkeywords(conn, obj["id"])
-		obj["illegal"] = getillegals(conn, obj["id"])
+		obj["keywords"] = getkeywords(conn, str(row[0]))
+		obj["illegal"] = getillegals(conn, str(row[0]))
 		obj["inside"] = bool(row[4])
 		obj["all"] = bool(row[5])
 		obj["admin"] = bool(row[6])
 		pos = getpos(conn, obj["id"])
-		print(pos)
 		final[pos] = obj
 
 	print(final)
