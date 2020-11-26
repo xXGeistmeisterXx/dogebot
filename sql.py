@@ -13,7 +13,7 @@ def getkeywords(conn, id):
 def getillegals(conn, id):
 	cur = conn.cursor()
 	cur.execute("SELECT illegal FROM illegals")
-	return list(cur.fetchall()[0])
+	return list(cur.fetchall())
 
 def getpos(conn, id):
 	cur = conn.cursor()
