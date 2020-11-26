@@ -32,7 +32,6 @@ f.close()
 
 commands = sql.getcommands(dbcc)
 admins = sql.getadmins(dbcc)
-print(admins)
 stats = sql.getstats(dbcc)
 game = sql.getstatus(dbcc)
 anumres()
