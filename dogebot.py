@@ -26,10 +26,12 @@ def log(content):
 def anummessent():
 	stats["messagessen"] += 1
 	sql.updatemessages(dbcc, stats)
+	commit()
 
 def anumres():
 	stats["timesrestarted"] += 1
 	sql.updaterestarts(dbcc, stats)
+	commit()
 
 client = discord.Client()
 f = open("token.txt", "r")
