@@ -1,6 +1,6 @@
 import sqlite3
 
-def cc(filname):
+def cc(filename):
 	conn = None
 	conn = sqlite3.connect(filename)
 	return conn
