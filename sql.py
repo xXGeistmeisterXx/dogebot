@@ -50,10 +50,11 @@ def getcommands(conn):
 	#"admin":False
 	#}
 
-	obj = {}
+	nobj = {}
 
 	for row in list(commands):
 		print(row)
+		obj = nobj.copy()
 		obj["id"] = str(row[0])
 		obj["name"] = str(row[1])
 		obj["content"] = str(row[2])
@@ -66,7 +67,6 @@ def getcommands(conn):
 		pos = getpos(conn, obj["id"])
 		print(pos)
 		final[pos] = obj
-		obj.del
 
 	print(final)
 	return final
