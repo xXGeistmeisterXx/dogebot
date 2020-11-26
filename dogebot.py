@@ -32,7 +32,7 @@ f.close()
 
 commands = sql.getcommands(dbcc)
 stats = sql.getstats(dbcc)
-game = sql.getgame(dbcc)
+game = sql.getstatus(dbcc)
 anumres()
 
 async def setgame():
