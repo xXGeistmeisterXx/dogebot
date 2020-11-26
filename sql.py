@@ -7,7 +7,7 @@ def cc(filename):
 
 def getkeywords(conn, id):
 	cur = conn.cursor()
-	cur.execute("SELECT keyword FROM keywords")
+	cur.execute("SELECT keyword FROM keywords WHERE id={}".format(id))
 	keywords = list(cur.fetchall())
 	output = []
 	for keyword in keywords:
@@ -16,7 +16,7 @@ def getkeywords(conn, id):
 
 def getillegals(conn, id):
 	cur = conn.cursor()
-	cur.execute("SELECT illegal FROM illegals")
+	cur.execute("SELECT illegal FROM illegals WHERE id={}".format(id))
 	illegals = list(cur.fetchall())
 	output = []
 	for illegal in illegals:
@@ -57,8 +57,8 @@ def getcommands(conn):
 		obj["name"] = str(row[1])
 		obj["content"] = str(row[2])
 		obj["type"] = str(row[3])
-		obj["keywords"] = getkeywords(conn, str(row[0]))
-		obj["illegal"] = getillegals(conn, str(row[0]))
+		obj["keywords"] = getkeywords(conn, obj["id"])
+		obj["illegal"] = getillegals(conn, obj["id"])
 		obj["inside"] = bool(row[4])
 		obj["all"] = bool(row[5])
 		obj["admin"] = bool(row[6])
