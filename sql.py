@@ -89,9 +89,9 @@ def getadmins(conn):
 def updatemessages(conn, stats):
 	stats = getstats(conn)
 	cur = conn.cursor()
-	cur.execute("UPDATE stats SET messages = {} WHERE rowid = 1;".format(getstats["messagessen"]))
+	cur.execute("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))
 
 def updaterestarts(conn, stats):
 	stats = getstats(conn)
 	cur = conn.cursor()
-	cur.execute("UPDATE stats SET restarts = {} WHERE rowid = 1;".format(getstats["timesrestarted"]))
+	cur.execute("UPDATE stats SET restarts = {} WHERE rowid = 1;".format(stats["timesrestarted"]))
