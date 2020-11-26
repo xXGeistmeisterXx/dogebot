@@ -61,5 +61,5 @@ def getstats(message, conn):
 	embed = discord.Embed(title = "dogebot stats")
 	embed.add_field(name = "messages sent", value = str(stats["messagessen"]), inline = True)
 	embed.add_field(name = "times restarted", value = str(stats["timesrestarted"]), inline = True)
-	embed.thumbnail(url = message.guild.me.avatar_url)
+	embed.set_thumbnail(url = message.guild.me.avatar_url)
 	return embed
