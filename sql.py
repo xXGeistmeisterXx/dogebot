@@ -52,7 +52,7 @@ def getcommands(conn):
 
 	obj = {}
 
-	for row in commands:
+	for row in list(commands):
 		obj["id"] = str(row[0])
 		obj["name"] = str(row[1])
 		obj["content"] = str(row[2])
