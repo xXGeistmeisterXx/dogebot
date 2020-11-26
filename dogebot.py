@@ -41,20 +41,16 @@ async def setgame():
 
 @client.event
 async def on_message(message):
-	print("hi")
 	com = None
 	if(not message.author.bot):
 		for command in commands:
-			print("command")
 			notillegal = True
 			for illegal in command["illegal"]:
 				if illegal in message.content.lower():
 					notillegal = False
 			if(notillegal and ((command["admin"] and (str(message.author.id) in admins)) or (not command["admin"]))):
-				print("passed admin and illegal")
 				if(command["inside"]):
 					if(command["all"]):
-						print("you are here")
 						check = True
 						for keyword in command["keywords"]:
 							if(not(keyword in message.content.lower())):
@@ -71,7 +67,6 @@ async def on_message(message):
 							com = command
 
 		if(com):
-			print("did we make it")
 			now = time.strftime('%H:%M %m/%d/%Y')
 			log("(%s) %s activated %s" % (message.guild.name, message.author.name, com["name"]))
 			anummessent()
@@ -91,7 +86,13 @@ async def on_message(message):
 
 					await message.add_reaction(emoji)
 
+			elif(com["type"] == "embed"):
+
+				result = eval("functions." + str(content))
+				await message.channel.send(embed=result)
+
 			elif(com["type"] == "command"):
+				
 				result = eval("functions." + str(content))
 				await message.channel.send(result)
 

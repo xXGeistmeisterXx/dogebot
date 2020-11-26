@@ -1,3 +1,6 @@
+import sql
+import discord
+
 def usercommands(message, ctype):
 
 	length = len(message.content.split()[0])
@@ -51,3 +54,11 @@ def delcommand(command):
 			f = open("commands.json", "w")
 			f.write(json.dumps(commands))
 			f.close()
+
+def getstats(message):
+	stats = sql.getstats()
+	embed = discord.Embed(title = "dogebot stats")
+	embed.add_field(name = "messages sent", value = str(stats["messagessen"]), inline = True)
+	embed.add_field(name = "times restarted", value = str(stats["timesrestarted"]), inline = True)
+	embed.thumbnail(url = message.guild.me.avatar_url)
+	return embed
