@@ -68,6 +68,7 @@ async def on_message(message):
 							com = command
 
 		if(com):
+			print("did we make it")
 			now = time.strftime('%H:%M %m/%d/%Y')
 			log("(%s) %s activated %s" % (message.guild.name, message.author.name, com["name"]))
 			anummessent()
