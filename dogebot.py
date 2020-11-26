@@ -92,7 +92,7 @@ async def on_message(message):
 
 				#result = eval("functions." + str(content))
 				print("embed")
-				result = functions.getstats(message, conn)
+				result = functions.getstats(message, dbcc)
 				await message.channel.send(embed=result)
 
 			elif(com["type"] == "command"):
