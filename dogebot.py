@@ -9,14 +9,6 @@ import functions
 
 os.system("clear")
 
-dbfile = "db/doge.db"
-dbcc = sql.cc(dbfile)
-
-def commit():
-	global dbcc
-	dbcc.close()
-	dbcc = sql.cc(dbfile)
-
 def log(content):
 		f = open("doge.log", "a")
 		now = time.strftime('%H:%M %m/%d/%Y')
@@ -27,12 +19,10 @@ def log(content):
 def anummessent():
 	stats["messagessen"] += 1
 	sql.updatemessages(dbcc, stats)
-	commit()
 
 def anumres():
 	stats["timesrestarted"] += 1
 	sql.updaterestarts(dbcc, stats)
-	commit()
 
 client = discord.Client()
 f = open("token.txt", "r")
