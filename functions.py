@@ -71,9 +71,9 @@ def getcoms(message, commands):
 
 def em(value):
 	if(value):
-		return "🟩"
+		return "\U+1F7E9"
 	else:
-		return "🟥"
+		return "\U+1F7E5"
 
 def getinfo(message, commands):
 	content = message.content.lower().replace("db.info ", "")
