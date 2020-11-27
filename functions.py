@@ -68,3 +68,41 @@ def getcoms(message, commands):
 		embed.add_field(name = command["name"], value = command["keywords"][0], inline = False)
 	embed.set_thumbnail(url = message.guild.me.avatar_url)
 	return embed
+
+def em(value):
+	if(value):
+		return "🟩"
+	else:
+		return "🟥"
+
+def getinfo(message, commands):
+	content = message.content.lower().replace("db.info ", "")
+	flag = False
+	tcommand = {}
+	for command in commands:
+		if command["name"] == content:
+			flag = True
+			tcommand = command
+			break
+	if(flag):
+		keywords = ""
+		for keyword in tcommand["keywords"]:
+			keywords = keywords + keyword + ","
+		keywords = keywords[:len(keywords)-2]
+		illegals = ""
+		for illegal in tcommand["illegals"]:
+			illegals = illegals + illegal + ","
+		illegals = illegals[:len(illegals)-2]
+		embed = discord.Embed(title = tcommand["name"], color = discord.Color.from_rgb(209, 170, 88))
+		embed.add_field(name = "id", value = tcommand["id"], inline = False)
+		embed.add_field(name = "name", value = tcommand["name"], inline = False)
+		embed.add_field(name = "content", value = tcommand["content"], inline = False)
+		embed.add_field(name = "keywords", value = keywords, inline = False)
+		embed.add_field(name = "illegal", value = illegals, inline = False)
+		embed.add_field(name = "inside", value = em(tcommand["inside"]), inline = False)
+		embed.add_field(name = "all", value = em(tcommand["all"]), inline = False)
+		embed.add_field(name = "admin", value = em(tcommand["asmin"]), inline = False)
+		embed.set_thumbnail(url = message.guild.me.avatar_url)
+	else:
+		embed = discord.Embed(title = "command not found", color = discord.Color.from_rgb(209, 170, 88))
+	return embed
