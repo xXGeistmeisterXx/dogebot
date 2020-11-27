@@ -86,7 +86,6 @@ def getadmins(conn):
 	output = []
 	for admin in admins:
 		output.append(int(admin[0]))
-	print(output)
 	return output
 
 def updatemessages(conn, stats):
