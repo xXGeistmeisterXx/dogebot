@@ -95,7 +95,7 @@ def getinfo(message, commands):
 		illegals = illegals[0:len(illegals) - 1]
 		if not illegals:
 			illegals = "-"
-		embed = discord.Embed(title = tcommand["name"], color = discord.Color.from_rgb(209, 170, 88))
+		embed = discord.Embed(title = "command info", color = discord.Color.from_rgb(209, 170, 88))
 		embed.add_field(name = "id", value = tcommand["id"], inline = False)
 		embed.add_field(name = "name", value = tcommand["name"], inline = False)
 		embed.add_field(name = "content", value = tcommand["content"], inline = False)
