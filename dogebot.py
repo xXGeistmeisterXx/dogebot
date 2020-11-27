@@ -51,7 +51,7 @@ async def on_message(message):
 			for illegal in command["illegal"]:
 				if illegal in message.content.lower():
 					notillegal = False
-			if(notillegal and ((command["admin"] and (str(message.author.id) in admins)) or (not command["admin"]))):
+			if(notillegal and ((command["admin"] and message.author.id in admins)) or (not command["admin"]))):
 				if(command["inside"]):
 					if(command["all"]):
 						check = True
