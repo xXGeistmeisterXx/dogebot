@@ -7,6 +7,7 @@ import sqlite3
 import sql
 import functions
 
+dbcc = "no"
 os.system("clear")
 
 def log(content):
