@@ -105,6 +105,7 @@ def updatemessages(conn, stats):
 	stats = getstats(conn)
 	cur = conn.cursor()
 	cur.execute("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))
+	print("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))
 	conn.commit()
 	cur.close()
 	conn.close()
