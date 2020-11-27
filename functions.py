@@ -90,7 +90,7 @@ def getinfo(message, commands):
 			keywords = keywords + keyword + ","
 		keywords = keywords[:len(keywords)-2]
 		illegals = ""
-		for illegal in tcommand["illegals"]:
+		for illegal in tcommand["illegal"]:
 			illegals = illegals + illegal + ","
 		illegals = illegals[:len(illegals)-2]
 		embed = discord.Embed(title = tcommand["name"], color = discord.Color.from_rgb(209, 170, 88))
