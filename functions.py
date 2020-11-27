@@ -93,6 +93,7 @@ def getinfo(message, commands):
 		for illegal in tcommand["illegal"]:
 			illegals = illegals + illegal + ","
 		illegals = illegals[:len(illegals)-2]
+		print(illegals)
 		embed = discord.Embed(title = tcommand["name"], color = discord.Color.from_rgb(209, 170, 88))
 		embed.add_field(name = "id", value = tcommand["id"], inline = False)
 		embed.add_field(name = "name", value = tcommand["name"], inline = False)
