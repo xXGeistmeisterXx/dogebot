@@ -105,16 +105,22 @@ def updatemessages(conn, stats):
 	stats = getstats(conn)
 	cur = conn.cursor()
 	cur.execute("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))
+<<<<<<< HEAD
 	print("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))
 	conn.commit()
 	cur.close()
 	conn.close()
+=======
+>>>>>>> parent of f484bb9... tadaa
 
 def updaterestarts(conn, stats):
 	conn = cc(dbfile)
 	stats = getstats(conn)
 	cur = conn.cursor()
 	cur.execute("UPDATE stats SET restarts = {} WHERE rowid = 1;".format(stats["timesrestarted"]))
+<<<<<<< HEAD
 	conn.commit()
 	cur.close()
 	conn.close()
+=======
+>>>>>>> parent of f484bb9... tadaa

@@ -20,7 +20,11 @@ def log(content):
 def anummessent():
 	stats["messagessen"] += 1
 	sql.updatemessages(dbcc, stats)
+<<<<<<< HEAD
 	print(sql.getstats(dbcc))
+=======
+	print(sql.getstats(dbcc)["messagessen"])
+>>>>>>> parent of f484bb9... tadaa
 
 def anumres():
 	stats["timesrestarted"] += 1
