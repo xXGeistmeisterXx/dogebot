@@ -12,6 +12,7 @@ def getkeywords(conn, id):
 	output = []
 	for keyword in keywords:
 		output.append(keyword[0])
+	cur.close()
 	return output
 
 def getillegals(conn, id):
@@ -21,12 +22,15 @@ def getillegals(conn, id):
 	output = []
 	for illegal in illegals:
 		output.append(illegal[0])
+	cur.close()
 	return output
 
 def getpos(conn, id):
 	cur = conn.cursor()
 	cur.execute("SELECT rowid FROM corder WHERE id={}".format(id))
-	return cur.fetchall()[0][0] - 1
+	output = cur.fetchall()[0][0] - 1
+	cur.close()
+	return output
 
 def getcommands(conn):
 	cur = conn.cursor()
@@ -34,6 +38,7 @@ def getcommands(conn):
 	commands = cur.fetchall()
 	cur.execute("SELECT * FROM commands")
 	commands = cur.fetchall()
+	cur.close()
 
 	final = [None] * len(commands)
 
@@ -72,12 +77,15 @@ def getstats(conn):
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM stats")
 	stats = cur.fetchall()
+	cur.close()
 	return {"timesrestarted":stats[0][0], "messagessen":stats[0][1]}
 
 def getstatus(conn):
 	cur = conn.cursor()
 	cur.execute("SELECT status FROM status")
-	return cur.fetchall()[0][0]
+	output = cur.fetchall()[0][0]
+	cur.close()
+	return output
 
 def getadmins(conn):
 	cur = conn.cursor()
@@ -86,6 +94,7 @@ def getadmins(conn):
 	output = []
 	for admin in admins:
 		output.append(int(admin[0]))
+	cur.close()
 	return output
 
 def updatemessages(conn, stats):
