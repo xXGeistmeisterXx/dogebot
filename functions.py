@@ -89,7 +89,8 @@ def getinfo(message, commands):
 		for keyword in tcommand["keywords"]:
 			keywords = keywords + keyword + ","
 		print(keywords)
-		keywords = keywords[0:len(keywords)-2]
+		keywords = keywords[:len(keywords) - 1]
+		print(keywords)
 		illegals = ""
 		for illegal in tcommand["illegal"]:
 			illegals = illegals + illegal + ","
