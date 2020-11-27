@@ -56,8 +56,15 @@ def delcommand(command):
 			f.close()
 
 def getstats(message, stats):
-	embed = discord.Embed(title = "dogebot stats", color = discord.Color.from_rgb(209, 170, 88))
+	embed = discord.Embed(title = "stats", color = discord.Color.from_rgb(209, 170, 88))
 	embed.add_field(name = "messages sent", value = str(stats["messagessen"]), inline = True)
 	embed.add_field(name = "times restarted", value = str(stats["timesrestarted"]), inline = True)
 	embed.set_thumbnail(url = message.guild.me.avatar_url)
+	return embed
+
+def getcoms(message, commands):
+	embed = discord.Embed(title = "commands", color = discord.Color.from_rgb(209, 170, 88))
+	for command in commands:
+		embed.add_field(name = command["name"], value = command["keywords"][0], inline = False)
+	embed.set_footer(url = message.guild.me.avatar_url)
 	return embed
