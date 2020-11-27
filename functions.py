@@ -99,9 +99,9 @@ def getinfo(message, commands):
 		embed.add_field(name = "content", value = tcommand["content"], inline = False)
 		embed.add_field(name = "keywords", value = keywords, inline = False)
 		embed.add_field(name = "illegal", value = illegals, inline = False)
-		embed.add_field(name = "inside", value = em(tcommand["inside"]), inline = False)
-		embed.add_field(name = "all", value = em(tcommand["all"]), inline = False)
-		embed.add_field(name = "admin", value = em(tcommand["admin"]), inline = False)
+		#embed.add_field(name = "inside", value = em(tcommand["inside"]), inline = False)
+		#embed.add_field(name = "all", value = em(tcommand["all"]), inline = False)
+		#embed.add_field(name = "admin", value = em(tcommand["admin"]), inline = False)
 		embed.set_thumbnail(url = message.guild.me.avatar_url)
 	else:
 		embed = discord.Embed(title = "command not found", color = discord.Color.from_rgb(209, 170, 88))
