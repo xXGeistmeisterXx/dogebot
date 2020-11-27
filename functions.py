@@ -66,5 +66,5 @@ def getcoms(message, commands):
 	embed = discord.Embed(title = "commands", color = discord.Color.from_rgb(209, 170, 88))
 	for command in commands:
 		embed.add_field(name = command["name"], value = command["keywords"][0], inline = False)
-	embed.set_footer(url = message.guild.me.avatar_url)
+	embed.set_footer(icon_url = message.guild.me.avatar_url)
 	return embed
