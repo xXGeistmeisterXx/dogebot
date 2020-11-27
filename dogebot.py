@@ -20,6 +20,7 @@ def log(content):
 def anummessent():
 	stats["messagessen"] += 1
 	sql.updatemessages(dbcc, stats)
+	print(sql.getstats(dbcc))
 
 def anumres():
 	stats["timesrestarted"] += 1
