@@ -101,6 +101,11 @@ async def on_message(message):
 				result = eval("functions." + str(com["content"]))
 				await message.channel.send(result)
 
+			elif(com["type"] == "restart"):
+				results = functions.restart()
+				await message.channel.send(embed=results)
+				os.system("sudo systemctl restart dogebot")
+
 			elif(com["type"] == "reload"):
 				commands = sql.getcommands(dbcc)
 				admins = sql.getadmins(dbcc)
