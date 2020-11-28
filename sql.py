@@ -80,7 +80,7 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 	query = "INSERT INTO commands(name,content,type,inside,'all',admin) VALUES ('{}', '{}', '{}', {}, {}, {})".format(name, content, type, int(inside), int(all), int(admin))
 	cur.execute(query)
 	conn.commit()
-	query = "SELECT id FROM commands WHERE name='{}' AND content='{}' AND type='{}' AND inside={} AND 'all'={} AND admin={}".format(name, content, type, int(inside), int(all), int(admin))
+	query = "SELECT id FROM commands WHERE name='{}' AND content='{}' AND type='{}' AND inside={} AND \"all\"={} AND admin={}".format(name, content, type, int(inside), int(all), int(admin))
 	print(query)
 	cur.execute(query)
 	id = cur.fetchall()

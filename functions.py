@@ -19,7 +19,7 @@ def addcom(conn, message):
 			newcom[num] = True
 		else:
 			newcom[num] = False
-	sql.addcom(conn, newcom[1], newcom[2], newcom[3], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5], newcom[9])
+	sql.addcom(conn, newcom[1], newcom[3], newcom[2], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5], newcom[9])
 	embed = discord.Embed(title = "command added", color = discord.Color.from_rgb(209, 170, 88))
 	return embed
 
