@@ -79,7 +79,7 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 	cur = conn.cursor()
 	query = "INSERT INTO commands(name,content,type,inside,'all',admin) VALUES ('{}', '{}', '{}', {}, {}, {})".format(name, content, type, int(inside), int(all), int(admin))
 	cur.execute(query)
-	query = "SELECT id FROM commands WHERE name='{}', content='{}', type='{}', inside={}, 'all'={}, admin={}".format(name, content, type, int(inside), int(all), int(admin))
+	query = "SELECT id FROM commands WHERE name='{}' AND content='{}' AND type='{}' AND inside={} AND 'all'={} AND admin={}".format(name, content, type, int(inside), int(all), int(admin))
 	id = cur.execute(query)[0]
 	for keyword in keywords:
 		query = "INSERT INTO commands(id, keyword) VALUES ({},'{}')".format(id, keyword)
