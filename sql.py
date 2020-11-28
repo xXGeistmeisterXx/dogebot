@@ -75,7 +75,7 @@ def getadmins(conn):
 		output.append(int(admin[0]))
 	return output
 
-def addcom(name, content, type, inside, all, admin, keywords, illegals, loc):
+def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, loc):
 	cur = conn.cursor()
 	query = "INSERT INTO commands(name,content,type,inside,all,admin) VALUES ('{}', '{}', '{}', {}, {}, {})".format(name, content, type, int(inside), int(all), int(admin))
 	cur.execute(query)

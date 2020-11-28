@@ -1,7 +1,7 @@
 import sql
 import discord
 
-def addcom(message):
+def addcom(conn, message):
 	newcom = message.content.splitlines()
 	if(not(newcom[1] and newcom[2] and newcom[3] and newcom[6] and newcom[7] and newcom[8] and newcom[9])):
 		embed = discord.Embed(title = "missing info", color = discord.Color.from_rgb(209, 170, 88))
@@ -19,7 +19,7 @@ def addcom(message):
 			newcom[num] = True
 		else:
 			newcom[num] = False
-	sql.addcom(newcom[1], newcom[2], newcom[3], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5], newcom[9])
+	sql.addcom(conn, newcom[1], newcom[2], newcom[3], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5], newcom[9])
 	embed = discord.Embed(title = "command added", color = discord.Color.from_rgb(209, 170, 88))
 	return embed
 
