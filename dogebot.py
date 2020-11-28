@@ -44,7 +44,7 @@ async def setgame():
 
 @client.event
 async def on_message(message):
-	global commands
+	global commands, admins, stats, game
 	com = None
 	if(not message.author.bot):
 		for command in commands:
@@ -101,7 +101,6 @@ async def on_message(message):
 				await message.channel.send(result)
 
 			elif(com["type"] == "reload"):
-				global admins, stats, game
 				commands = sql.getcommands(dbcc)
 				admins = sql.getadmins(dbcc)
 				stats = sql.getstats(dbcc)
