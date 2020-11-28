@@ -81,7 +81,7 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 	cur.execute(query)
 	conn.commit()
 	query = "SELECT id FROM commands WHERE name='{}' AND content='{}' AND type='{}' AND inside={} AND 'all'={} AND admin={}".format(name, content, type, int(inside), int(all), int(admin))
-	orint(query)
+	print(query)
 	cur.execute(query)
 	id = cur.fetchall()
 	print(id)
