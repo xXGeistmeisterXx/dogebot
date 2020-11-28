@@ -44,6 +44,7 @@ async def setgame():
 
 @client.event
 async def on_message(message):
+	global commands
 	com = None
 	if(not message.author.bot):
 		for command in commands:
