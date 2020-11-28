@@ -1,6 +1,9 @@
 import sql
 import discord
 
+def reload():
+	return discord.Embed(title = "db reloaded", color = discord.Color.from_rgb(209, 170, 88))
+
 def addcom(conn, message):
 	newcom = message.content.splitlines()
 	if(not(newcom[1] and newcom[2] and newcom[3] and newcom[6] and newcom[7] and newcom[8] and newcom[9])):
@@ -10,7 +13,7 @@ def addcom(conn, message):
 		newcom[4] = []
 	else:
 		newcom[4] = newcom[4].split("|")
-	if not newcom[4]:
+	if not newcom[5]:
 		newcom[5] = []
 	else:
 		newcom[5] = newcom[5].split("|")
@@ -22,8 +25,6 @@ def addcom(conn, message):
 	sql.addcom(conn, newcom[1], newcom[3], newcom[2], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5], newcom[9])
 	embed = discord.Embed(title = "command added", color = discord.Color.from_rgb(209, 170, 88))
 	return embed
-
-
 
 def getstats(message, stats):
 	embed = discord.Embed(title = "stats", color = discord.Color.from_rgb(209, 170, 88))
@@ -57,11 +58,11 @@ def getinfo(message, commands):
 	if(flag):
 		keywords = ""
 		for keyword in tcommand["keywords"]:
-			keywords = keywords + keyword + ","
+			keywords = keywords + keyword + " | "
 		keywords = keywords[:len(keywords) - 1]
 		illegals = ""
 		for illegal in tcommand["illegal"]:
-			illegals = illegals + illegal + ","
+			illegals = illegals + illegal + " | "
 		illegals = illegals[0:len(illegals) - 1]
 		if not illegals:
 			illegals = "-"

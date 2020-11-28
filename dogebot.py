@@ -99,6 +99,15 @@ async def on_message(message):
 				result = eval("functions." + str(com["content"]))
 				await message.channel.send(result)
 
+			elif(com["type"] == "reload"):
+
+				commands = sql.getcommands(dbcc)
+				admins = sql.getadmins(dbcc)
+				stats = sql.getstats(dbcc)
+				game = sql.getstatus(dbcc)
+				result = functions.reload()
+				await message.channel.send(embed=results)
+
 log("STARTED DOGEBOT")
 client.loop.create_task(setgame())
 client.run(token)
