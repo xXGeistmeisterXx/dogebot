@@ -80,7 +80,8 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 	query = "INSERT INTO commands(name,content,type,inside,'all',admin) VALUES ('{}', '{}', '{}', {}, {}, {})".format(name, content, type, int(inside), int(all), int(admin))
 	cur.execute(query)
 	query = "SELECT id FROM commands WHERE name='{}' AND content='{}' AND type='{}' AND inside={} AND 'all'={} AND admin={}".format(name, content, type, int(inside), int(all), int(admin))
-	id = (cur.execute(query))[0]
+	cur.execute(query)
+	id = cur.fetchall()[0]
 	for keyword in keywords:
 		query = "INSERT INTO commands(id, keyword) VALUES ({},'{}')".format(id, keyword)
 		cur.execute(query)
@@ -88,7 +89,8 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 		query = "INSERT INTO illegals(id, illegal) VALUES ({},'{}')".format(id, illegal)
 		cur.execute(query)
 	query = "SELECT id FROM corder"
-	order = (cur.execute(query))[0]
+	cur.execute(query)
+	order = cur.fetchall()[0]
 	if loc > order[len(order) - 1]:
 		query = "INSERT INTO corder(id) VALUES ({})".format(id)
 		cur.execute(query)
