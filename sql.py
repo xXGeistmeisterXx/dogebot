@@ -85,7 +85,6 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 	id = cur.fetchall()[0][0]
 	for keyword in keywords:
 		query = "INSERT INTO keywords(id, keyword) VALUES ({},'{}')".format(id, keyword)
-		print(query)
 		cur.execute(query)
 	for illegal in illegals:
 		query = "INSERT INTO illegals(id, illegal) VALUES ({},'{}')".format(id, illegal)
@@ -96,7 +95,6 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 	order = []
 	for thing in corder:
 		order.append(thing[0])
-	print(order)
 	if int(loc) > order[len(order) - 1]:
 		query = "INSERT INTO corder(id) VALUES ({})".format(id)
 		cur.execute(query)
