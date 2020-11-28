@@ -84,7 +84,7 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 	id = cur.fetchall()
 	print(id)
 	for keyword in keywords:
-		query = "INSERT INTO commands(id, keyword) VALUES ({},'{}')".format(id, keyword)
+		query = "INSERT INTO keywords(id, keyword) VALUES ({},'{}')".format(id, keyword)
 		cur.execute(query)
 	for illegal in illegals:
 		query = "INSERT INTO illegals(id, illegal) VALUES ({},'{}')".format(id, illegal)
