@@ -97,7 +97,7 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 	for thing in corder:
 		order.append(thing[0])
 	print(order)
-	if loc > order[len(order) - 1]:
+	if int(loc) > order[len(order) - 1]:
 		query = "INSERT INTO corder(id) VALUES ({})".format(id)
 		cur.execute(query)
 	else:
