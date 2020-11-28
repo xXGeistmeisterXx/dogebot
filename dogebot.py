@@ -36,6 +36,7 @@ commands = sql.getcommands(dbcc)
 admins = sql.getadmins(dbcc)
 stats = sql.getstats(dbcc)
 game = sql.getstatus(dbcc)
+bans = sql.getbans(dbcc)
 anumres()
 
 async def setgame():
@@ -44,9 +45,9 @@ async def setgame():
 
 @client.event
 async def on_message(message):
-	global commands, admins, stats, game
+	global commands, admins, stats, game, bans
 	com = None
-	if(not message.author.bot):
+	if(not message.author.bot and message.author.id not in bans):
 		for command in commands:
 			notillegal = True
 			for illegal in command["illegal"]:
@@ -105,6 +106,7 @@ async def on_message(message):
 				admins = sql.getadmins(dbcc)
 				stats = sql.getstats(dbcc)
 				game = sql.getstatus(dbcc)
+				bans = sql.getbans(dbcc)
 				results = functions.reload()
 				await message.channel.send(embed=results)
 

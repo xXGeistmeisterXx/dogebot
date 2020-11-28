@@ -75,6 +75,15 @@ def getadmins(conn):
 		output.append(int(admin[0]))
 	return output
 
+def getbans(conn):
+	cur = conn.cursor()
+	cur.execute("SELECT dcid FROM bans")
+	bans = list(cur.fetchall())
+	output = []
+	for ban in bans:
+		output.append(int(ban[0]))
+	return output
+
 def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, loc):
 	cur = conn.cursor()
 	query = "INSERT INTO commands(name,content,type,inside,'all',admin) VALUES ('{}', '{}', '{}', {}, {}, {})".format(name, content, type, int(inside), int(all), int(admin))
