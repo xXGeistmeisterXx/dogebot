@@ -2,7 +2,7 @@ import sql
 import discord
 
 def reload():
-	return discord.Embed(title = "db reloaded", color = discord.Color.from_rgb(209, 170, 88))
+	return discord.Embed(title = "commands database reloaded", color = discord.Color.from_rgb(209, 170, 88))
 
 def addcom(conn, message):
 	newcom = message.content.splitlines()
