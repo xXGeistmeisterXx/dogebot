@@ -104,7 +104,7 @@ async def on_message(message):
 			elif(com["type"] == "restart"):
 				results = functions.restart()
 				await message.channel.send(embed=results)
-				os.system("sudo systemctl restart dogebot")
+				os.system("systemctl restart dogebot")
 				print("ran")
 
 			elif(com["type"] == "reload"):
