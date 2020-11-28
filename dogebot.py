@@ -45,6 +45,7 @@ async def setgame():
 @client.event
 async def on_message(message):
 	com = None
+	print(message.content)
 	if(not message.author.bot):
 		for command in commands:
 			notillegal = True

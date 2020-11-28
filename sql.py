@@ -36,19 +36,6 @@ def getcommands(conn):
 	commands = cur.fetchall()
 
 	final = [None] * len(commands)
-
-	#obj = {
-	#"id":0,
-	#"name":"",
-	#"keywordz":"",
-	#"illegal":[],
-	#"content":"",
-	#"type":"",
-	#"inside":False,
-	#"all":False,
-	#"admin":False
-	#}
-
 	nobj = {}
 
 	for row in list(commands):
