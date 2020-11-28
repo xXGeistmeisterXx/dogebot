@@ -101,7 +101,7 @@ async def on_message(message):
 				await message.channel.send(result)
 
 			elif(com["type"] == "reload"):
-				global commands, admins, stats, game
+				global admins, stats, game
 				commands = sql.getcommands(dbcc)
 				admins = sql.getadmins(dbcc)
 				stats = sql.getstats(dbcc)
