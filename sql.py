@@ -75,6 +75,33 @@ def getadmins(conn):
 		output.append(int(admin[0]))
 	return output
 
+def addcom(name, content, type, inside, all, admin, keywords, illegals, loc):
+	query = "INSERT INTO commands(name,content,type,inside,all,admin) VALUES ('{}', '{}', '{}', {}, {}, {})".format(name, content, type, int(inside), int(all), int(admin))
+	cur.execute(query)
+	query = "SELECT id FROM commands WHERE name='{}', content='{}', type='{}', inside={}, all={}, admin={}".format(name, content, type, int(inside), int(all), int(admin))
+	id = cur.execute(query)[0]
+	for keyword in keywords:
+		query = "INSERT INTO commands(id, keyword) VALUES ({},'{}')".format(id, keyword)
+		cur.execute(query)
+	for illegal in illegals:
+		query = "INSERT INTO illegals(id, illegal) VALUES ({},'{}')".format(id, illegal)
+		cur.execute(query)
+	query = "SELECT id FROM corder"
+	order = cur.execute(query)[0]
+	if loc > order[len(order) - 1]:
+		query = "INSERT INTO corder(id) VALUES ({})".format(id)
+		cur.execute(query)
+	else:
+		norder = [id] + order[loc-1:len(order) - 1]
+		for id in norder:
+			query = "UPDATE corder SET id = {} WHERE rowid = {}".format(id, loc)
+			cur.execute(query)
+			loc += 1
+		query = "INSERT INTO corder(id) VALUES ({})".format(order[len(order) - 1])
+		cur.execute(query)
+	conn.commit()
+
+
 def updatemessages(conn, stats):
 	cur = conn.cursor()
 	cur.execute("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))

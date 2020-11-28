@@ -1,59 +1,29 @@
 import sql
 import discord
 
-def usercommands(message, ctype):
+def addcom(message):
+	newcom = message.content.splitlines()
+	if(not(newcom[1] and newcom[2] and newcom[3] and newcom[6] and newcom[7] and newcom[8] and newcom[9])):
+		embed = discord.Embed(title = "missing info", color = discord.Color.from_rgb(209, 170, 88))
+		return embed
+	if not newcom[4]:
+		newcom[4] = []
+	else:
+		newcom[4] = newcom[4].split("|")
+	if not newcom[4]:
+		newcom[5] = []
+	else:
+		newcom[5] = newcom[5].split("|")
+	for num in range(6,9):
+		if newcom[num] == "yes":
+			newcom[num] = True
+		else:
+			newcom[num] = False
+	sql.addcom(newcom[1], newcom[2], newcom[3], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5], newcom[9])
+	embed = discord.Embed(title = "command added", color = discord.Color.from_rgb(209, 170, 88))
+	return embed
 
-	length = len(message.content.split()[0])
-	command = message.content[length + 1:]
 
-	if(ctype == "add"):
-
-		addcommand(json.loads(command))
-		log("added " + json.loads(command)["name"])
-
-	elif(ctype == "update"):
-
-		upcommand(json.loads(command))
-		log("updated " + json.loads(command)["name"])
-
-	elif(ctype == "delete"):
-
-		delcommand(json.loads(command))
-		log("deleted " + json.loads(command)["name"])
-
-	return("commands db updated successfully")
-
-def getstatsf(message):
-	result = "```dogebot stats:\n"
-	result = result + " - times restarted: " + str(stats["timesrestarted"]) + "\n"
-	result = result + " - number of messages sent: " + str(stats["messagessen"])
-	return(result + "```")
-
-def addcommand(command):
-	for ocommand in commands:
-		if(ocommand["name"] == command["name"]):
-			return()
-	commands.append(command)
-	f = open("commands.json", "w")
-	f.write(json.dumps(commands))
-	f.close()
-
-def upcommand(command):
-	for i in range(len(commands)):
-		if(commands[i]["name"] == command["name"]):
-			commands[i] = command
-			f = open("commands.json", "w")
-			f.write(json.dumps(commands))
-			f.close()
-			return()
-
-def delcommand(command):
-	for i in range(len(commands)):
-		if(commands[i]["name"] == command["name"]):
-			del commands[i]
-			f = open("commands.json", "w")
-			f.write(json.dumps(commands))
-			f.close()
 
 def getstats(message, stats):
 	embed = discord.Embed(title = "stats", color = discord.Color.from_rgb(209, 170, 88))
@@ -98,6 +68,7 @@ def getinfo(message, commands):
 		embed = discord.Embed(title = "command info", color = discord.Color.from_rgb(209, 170, 88))
 		embed.add_field(name = "id", value = tcommand["id"], inline = False)
 		embed.add_field(name = "name", value = tcommand["name"], inline = False)
+		embed.add_field(name = "type", value = tcommand["type"], inline = False)
 		embed.add_field(name = "content", value = tcommand["content"], inline = False)
 		embed.add_field(name = "keywords", value = keywords, inline = False)
 		embed.add_field(name = "illegal", value = illegals, inline = False)
