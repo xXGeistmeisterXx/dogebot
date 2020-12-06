@@ -56,6 +56,9 @@ def getcoms(message, commands):
 	print(types)
 	for type in types:
 		value = ""
+		if types[type] == []:
+			embed.add_field(name = type, value = "-", inline = False)
+			continue
 		for command in types[type]:
 			extra = ""
 			if command["admin"]:
