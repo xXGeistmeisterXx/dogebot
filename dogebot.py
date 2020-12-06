@@ -104,7 +104,7 @@ async def on_message(message):
 			elif(com["type"] == "restart"):
 				results = functions.restart()
 				await message.channel.send(embed=results)
-				os.system("sudo /bin/systemctl restart doge --no-ask-password")
+				os.system("/home/tgeist/update.sh")
 				print("ran")
 
 			elif(com["type"] == "reload"):
