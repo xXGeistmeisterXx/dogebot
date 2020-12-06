@@ -49,7 +49,7 @@ async def on_message(message):
 	com = None
 	if(not message.author.bot and message.author.id not in bans):
 		for command in commands:
-			print(command)
+			print(command["name"])
 			notillegal = True
 			for illegal in command["illegal"]:
 				if illegal in message.content.lower():
