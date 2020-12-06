@@ -114,8 +114,11 @@ async def on_message(message):
 				stats = sql.getstats(dbcc)
 				game = sql.getstatus(dbcc)
 				bans = sql.getbans(dbcc)
+				print("reloading 2")
 				results = functions.reload()
+				print("reloading 3")
 				await message.channel.send(embed=results)
+				print("reloading 4")
 
 log("STARTED DOGEBOT")
 client.loop.create_task(setgame())
