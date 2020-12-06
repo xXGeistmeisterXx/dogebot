@@ -62,6 +62,7 @@ def getstats(message, stats):
 
 def getcoms(message, mcommands):
 	embed = discord.Embed(title = "commands", color = discord.Color.from_rgb(209, 170, 88))
+	mcommands = commands.deepcopy()
 	types = {
 	"text":[],
 	"reaction":[],
