@@ -47,6 +47,7 @@ def getcoms(message, commands):
 	"function":[],
 	"control":[]
 	}
+	print(mcommands)
 	for command in mcommands:
 		if command["type"] not in types:
 			command["type"] = "control"
