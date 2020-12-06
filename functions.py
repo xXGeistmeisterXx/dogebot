@@ -85,11 +85,11 @@ def getinfo(message, commands):
 		keywords = ""
 		for keyword in tcommand["keywords"]:
 			keywords = keywords + keyword + " | "
-		keywords = keywords[:len(keywords) - 1]
+		keywords = keywords[:len(keywords) - 2]
 		illegals = ""
 		for illegal in tcommand["illegal"]:
 			illegals = illegals + illegal + " | "
-		illegals = illegals[0:len(illegals) - 1]
+		illegals = illegals[0:len(illegals) - 2]
 		if not illegals:
 			illegals = "-"
 		embed = discord.Embed(title = "command info", color = discord.Color.from_rgb(209, 170, 88))
