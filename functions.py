@@ -49,7 +49,7 @@ def updatecom(conn, message, commands):
 	if not upcom:
 		embed = discord.Embed(title = "missing info", color = discord.Color.from_rgb(209, 170, 88))
 		return embed
-	sql.updatecom(conn, upcom[1], upcom[2], upcom[4], upcom[3], upcom[7], upcom[8], upcom[9], upcom[5], upcom[6])
+	sql.updatecom(conn, newcom[0], newcom[1], newcom[3], newcom[2], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5])
 	embed = discord.Embed(title = "command updated", color = discord.Color.from_rgb(209, 170, 88))
 	return embed
 
