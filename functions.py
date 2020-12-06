@@ -56,7 +56,7 @@ def getcoms(message, commands):
 	print(types)
 	for type in types:
 		value = ""
-		for comamnd in type:
+		for command in type:
 			extra = ""
 			if command["admin"]:
 				extra = " 🟥 "
