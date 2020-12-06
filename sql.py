@@ -90,8 +90,6 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals):
 	for illegal in illegals:
 		query = "INSERT INTO illegals(id, illegal) VALUES ({},'{}')".format(id, illegal)
 		cur.execute(query)
-	query = "SELECT id FROM corder"
-	cur.execute(query)
 	conn.commit()
 
 def updatemessages(conn, stats):
