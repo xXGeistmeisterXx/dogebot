@@ -117,6 +117,7 @@ async def on_message(message):
 				print("reloading 2")
 				results = functions.reload()
 				print("reloading 3")
+				print(results.title)
 				await message.channel.send(embed=results)
 				print("reloading 4")
 
