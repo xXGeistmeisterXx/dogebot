@@ -23,19 +23,12 @@ def getillegals(conn, id):
 		output.append(illegal[0])
 	return output
 
-def getpos(conn, id):
-	cur = conn.cursor()
-	cur.execute("SELECT rowid FROM corder WHERE id={}".format(id))
-	return cur.fetchall()[0][0] - 1
-
 def getcommands(conn):
 	cur = conn.cursor()
-	cur.execute("SELECT * FROM commands")
-	commands = cur.fetchall()
-	cur.execute("SELECT * FROM commands")
+	cur.execute("SELECT * FROM commands ORDER BY type ASC, admin DESC, name ASC")
 	commands = cur.fetchall()
 
-	final = [None] * len(commands)
+	final = []
 	nobj = {}
 
 	for row in list(commands):
@@ -49,8 +42,7 @@ def getcommands(conn):
 		obj["inside"] = bool(row[4])
 		obj["all"] = bool(row[5])
 		obj["admin"] = bool(row[6])
-		pos = getpos(conn, obj["id"])
-		final[pos] = obj
+		final.append(obj)
 
 	print(final)
 	return final
@@ -84,7 +76,7 @@ def getbans(conn):
 		output.append(int(ban[0]))
 	return output
 
-def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, loc):
+def addcom(conn, name, content, type, inside, all, admin, keywords, illegals):
 	cur = conn.cursor()
 	query = "INSERT INTO commands(name,content,type,inside,'all',admin) VALUES ('{}', '{}', '{}', {}, {}, {})".format(name, content, type, int(inside), int(all), int(admin))
 	cur.execute(query)
@@ -100,23 +92,7 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals, lo
 		cur.execute(query)
 	query = "SELECT id FROM corder"
 	cur.execute(query)
-	corder = list(cur.fetchall())
-	order = []
-	for thing in corder:
-		order.append(thing[0])
-	if int(loc) > order[len(order) - 1]:
-		query = "INSERT INTO corder(id) VALUES ({})".format(id)
-		cur.execute(query)
-	else:
-		norder = [id] + order[loc-1:len(order) - 1]
-		for id in norder:
-			query = "UPDATE corder SET id = {} WHERE rowid = {}".format(id, loc)
-			cur.execute(query)
-			loc += 1
-		query = "INSERT INTO corder(id) VALUES ({})".format(order[len(order) - 1])
-		cur.execute(query)
 	conn.commit()
-
 
 def updatemessages(conn, stats):
 	cur = conn.cursor()

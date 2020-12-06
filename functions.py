@@ -9,7 +9,7 @@ def restart():
 
 def addcom(conn, message):
 	newcom = message.content.splitlines()
-	if(not(newcom[1] and newcom[2] and newcom[3] and newcom[6] and newcom[7] and newcom[8] and newcom[9])):
+	if(not(newcom[1] and newcom[2] and newcom[3] and newcom[6] and newcom[7] and newcom[8])):
 		embed = discord.Embed(title = "missing info", color = discord.Color.from_rgb(209, 170, 88))
 		return embed
 	if not newcom[4]:
@@ -25,7 +25,7 @@ def addcom(conn, message):
 			newcom[num] = True
 		else:
 			newcom[num] = False
-	sql.addcom(conn, newcom[1], newcom[3], newcom[2], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5], newcom[9])
+	sql.addcom(conn, newcom[1], newcom[3], newcom[2], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5])
 	embed = discord.Embed(title = "command added", color = discord.Color.from_rgb(209, 170, 88))
 	return embed
 
@@ -38,8 +38,18 @@ def getstats(message, stats):
 
 def getcoms(message, commands):
 	embed = discord.Embed(title = "commands", color = discord.Color.from_rgb(209, 170, 88))
-	for command in commands:
-		embed.add_field(name = command["name"], value = command["keywords"][0], inline = False)
+	mcommands = commands.copy()
+	types = {}
+	for command in mcommands:
+		if command["type"] not in types:
+			command["type"] = "control"
+		types[command["type"]].append(command)
+	for type in types:
+		value = ""
+		for comamnd in type:
+			value = value + command["name"] + "\n"
+		value = value[:len(value) - 1]
+		embed.add_field(name = type, value = value, inline = False)
 	embed.set_thumbnail(url = message.guild.me.avatar_url)
 	return embed
 
