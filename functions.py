@@ -54,6 +54,20 @@ def updatecom(conn, message, commands):
 	embed = discord.Embed(title = "command updated", color = discord.Color.from_rgb(209, 170, 88))
 	return embed
 
+def deletecom(conn, message, commands):
+	upcom = message.content.splitlines()
+	flag = False
+	for command in commands:
+		if upcom[1] == str(command["id"]):
+			flag = True
+			break
+	if not flag:
+		embed = discord.Embed(title = "command not found", color = discord.Color.from_rgb(209, 170, 88))
+		return embed
+	sql.deletecom(conn, upcom[1])
+	embed = discord.Embed(title = "command deleted", color = discord.Color.from_rgb(209, 170, 88))
+	return embed
+
 def getstats(message, stats):
 	embed = discord.Embed(title = "stats", color = discord.Color.from_rgb(209, 170, 88))
 	embed.add_field(name = "messages sent", value = str(stats["messagessen"]), inline = True)

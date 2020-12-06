@@ -108,6 +108,16 @@ def updatecom(conn, id, name, content, type, inside, all, admin, keywords, illeg
 		cur.execute(query)
 	conn.commit()
 
+def deletecom(conn, id):
+	cur = conn.cursor()
+	query = "DELETE FROM commands WHERE id={}".format(int(id))
+	cur.execute(query)
+	query = "DELETE FROM keywords WHERE id={}".format(int(id))
+	cur.execute(query)
+	query = "DELETE FROM illegals WHERE id={}".format(int(id))
+	cur.execute(query)
+	conn.commit()
+
 def updatemessages(conn, stats):
 	cur = conn.cursor()
 	cur.execute("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))
