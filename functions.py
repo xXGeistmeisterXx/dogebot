@@ -39,7 +39,7 @@ def updatecom(conn, message, commands):
 	upcom = message.content.splitlines()
 	flag = False
 	for command in commands:
-		if upcom[1] == str(comand["id"]):
+		if upcom[1] == str(command["id"]):
 			flag = True
 			break
 	if not flag:
