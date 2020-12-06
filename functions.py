@@ -47,13 +47,10 @@ def getcoms(message, commands):
 	"function":[],
 	"control":[]
 	}
-	print(mcommands)
 	for command in mcommands:
 		if command["type"] not in types:
 			command["type"] = "control"
 		types[command["type"]].append(command)
-	print("\n")
-	print(types)
 	for type in types:
 		value = ""
 		if types[type] == []:
@@ -66,7 +63,7 @@ def getcoms(message, commands):
 			value = value + command["name"] + extra + "\n"
 		value = value[:len(value) - 1]
 		embed.add_field(name = type, value = value, inline = False)
-	embed.set_thumbnail(url = "https://imgur.com/mj3Knw0.png")
+	#embed.set_thumbnail(url = "message.guild.me.avatar_url")
 	return embed
 
 def em(value):
