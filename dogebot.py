@@ -108,18 +108,13 @@ async def on_message(message):
 				print("ran")
 
 			elif(com["type"] == "reload"):
-				print("reloading")
 				commands = sql.getcommands(dbcc)
 				admins = sql.getadmins(dbcc)
 				stats = sql.getstats(dbcc)
 				game = sql.getstatus(dbcc)
 				bans = sql.getbans(dbcc)
-				print("reloading 2")
 				results = functions.reload()
-				print("reloading 3")
-				print(results.to_dict())
 				await message.channel.send(embed=results)
-				print("reloading 4")
 
 log("STARTED DOGEBOT")
 client.loop.create_task(setgame())
