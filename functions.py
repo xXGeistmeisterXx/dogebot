@@ -60,9 +60,8 @@ def getstats(message, stats):
 	embed.set_thumbnail(url = message.guild.me.avatar_url)
 	return embed
 
-def getcoms(message, commands):
+def getcoms(message, mcommands):
 	embed = discord.Embed(title = "commands", color = discord.Color.from_rgb(209, 170, 88))
-	mcommands = commands.copy()
 	types = {
 	"text":[],
 	"reaction":[],
