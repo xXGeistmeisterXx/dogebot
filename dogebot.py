@@ -49,7 +49,6 @@ async def on_message(message):
 	com = None
 	if(not message.author.bot and message.author.id not in bans):
 		for command in commands:
-			print(command["name"])
 			notillegal = True
 			for illegal in command["illegal"]:
 				if illegal in message.content.lower():
@@ -109,6 +108,7 @@ async def on_message(message):
 				print("ran")
 
 			elif(com["type"] == "reload"):
+				print("reloading")
 				commands = sql.getcommands(dbcc)
 				admins = sql.getadmins(dbcc)
 				stats = sql.getstats(dbcc)
