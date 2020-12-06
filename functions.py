@@ -52,6 +52,8 @@ def getcoms(message, commands):
 		if command["type"] not in types:
 			command["type"] = "control"
 		types[command["type"]].append(command)
+	print("\n")
+	print(types)
 	for type in types:
 		value = ""
 		for comamnd in type:
