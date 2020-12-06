@@ -25,7 +25,7 @@ def getillegals(conn, id):
 
 def getcommands(conn):
 	cur = conn.cursor()
-	cur.execute("SELECT * FROM commands ORDER BY type ASC, admin ASC, name ASC")
+	cur.execute("SELECT name, type, admin FROM commands ORDER BY IIF(type = 'embed', 1, 2) ASC, admin ASC, name ASC")
 	commands = cur.fetchall()
 
 	final = []
