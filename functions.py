@@ -1,5 +1,6 @@
 import sql
 import discord
+import copy
 
 def reload():
 	return discord.Embed(title = "database reloaded", color = discord.Color.from_rgb(209, 170, 88))
@@ -62,7 +63,7 @@ def getstats(message, stats):
 
 def getcoms(message, commands):
 	embed = discord.Embed(title = "commands", color = discord.Color.from_rgb(209, 170, 88))
-	mcommands = commands.deepcopy()
+	mcommands = copy.deepcopy(commands)
 	types = {
 	"text":[],
 	"reaction":[],
