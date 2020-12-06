@@ -45,7 +45,7 @@ def updatecom(conn, message, commands):
 	if not flag:
 		embed = discord.Embed(title = "command not found", color = discord.Color.from_rgb(209, 170, 88))
 		return embed
-	upcom = docom(upcom)
+	upcom = docom(upcom[1:])
 	if not upcom:
 		embed = discord.Embed(title = "missing info", color = discord.Color.from_rgb(209, 170, 88))
 		return embed
