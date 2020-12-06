@@ -7,26 +7,50 @@ def reload():
 def restart():
 	return discord.Embed(title = "dogebot restarting", color = discord.Color.from_rgb(209, 170, 88))
 
+def docom(com):
+	if(not(com[1] and com[2] and com[3] and com[6] and com[7] and com[8])):
+		return False
+	if not com[4]:
+		com[4] = []
+	else:
+		com[4] = com[4].split("|")
+	if not com[5]:
+		com[5] = []
+	else:
+		com[5] = com[5].split("|")
+	for num in range(6,9):
+		if com[num] == "yes":
+			com[num] = True
+		else:
+			com[num] = False
+	return com
+
 def addcom(conn, message):
 	newcom = message.content.splitlines()
-	if(not(newcom[1] and newcom[2] and newcom[3] and newcom[6] and newcom[7] and newcom[8])):
+	newcom = docom(newcom)
+	if not newcom:
 		embed = discord.Embed(title = "missing info", color = discord.Color.from_rgb(209, 170, 88))
 		return embed
-	if not newcom[4]:
-		newcom[4] = []
-	else:
-		newcom[4] = newcom[4].split("|")
-	if not newcom[5]:
-		newcom[5] = []
-	else:
-		newcom[5] = newcom[5].split("|")
-	for num in range(6,9):
-		if newcom[num] == "yes":
-			newcom[num] = True
-		else:
-			newcom[num] = False
 	sql.addcom(conn, newcom[1], newcom[3], newcom[2], newcom[6], newcom[7], newcom[8], newcom[4], newcom[5])
 	embed = discord.Embed(title = "command added", color = discord.Color.from_rgb(209, 170, 88))
+	return embed
+
+def updatecom(conn, message, commands):
+	upcom = message.content.splitlines()
+	flag = False
+	for command in commands:
+		if upcom[1] == str(comand["id"]):
+			flag = True
+			break
+	if not flag:
+		embed = discord.Embed(title = "command not found", color = discord.Color.from_rgb(209, 170, 88))
+		return embed
+	upcom = docom(upcom)
+	if not upcom:
+		embed = discord.Embed(title = "missing info", color = discord.Color.from_rgb(209, 170, 88))
+		return embed
+	sql.updatecom(conn, upcom[1], upcom[2], upcom[4], upcom[3], upcom[7], upcom[8], upcom[9], upcom[5], upcom[6])
+	embed = discord.Embed(title = "command updated", color = discord.Color.from_rgb(209, 170, 88))
 	return embed
 
 def getstats(message, stats):

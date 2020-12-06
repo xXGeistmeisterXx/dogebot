@@ -92,6 +92,22 @@ def addcom(conn, name, content, type, inside, all, admin, keywords, illegals):
 		cur.execute(query)
 	conn.commit()
 
+def updatecom(conn, id, name, content, type, inside, all, admin, keywords, illegals):
+	cur = conn.cursor()
+	query = "UPDATE commands SET name = {}, content = {}, type = {}, inside = {}, 'all' = {}, admin = {} WHERE id = {}".format(name, content, type, int(inside), int(all), int(admin), int(id))
+	cur.execute(query)
+	query = "DELETE FROM keywords WHERE id={}".format(int(id))
+	cur.execute(query)
+	for keyword in keywords:
+		query = "INSERT INTO keywords(id, keyword) VALUES ({},'{}')".format(id, keyword)
+		cur.execute(query)
+	query = "DELETE FROM illegals WHERE id={}".format(int(id))
+	cur.execute(query)
+	for illegal in illegals:
+		query = "INSERT INTO illegals(id, illegal) VALUES ({},'{}')".format(id, illegal)
+		cur.execute(query)
+	conn.commit()
+
 def updatemessages(conn, stats):
 	cur = conn.cursor()
 	cur.execute("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))
