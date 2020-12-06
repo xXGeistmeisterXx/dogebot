@@ -39,7 +39,14 @@ def getstats(message, stats):
 def getcoms(message, commands):
 	embed = discord.Embed(title = "commands", color = discord.Color.from_rgb(209, 170, 88))
 	mcommands = commands.copy()
-	types = {}
+	types = {
+	"text":[],
+	"reaction":[],
+	"file":[],
+	"embed":[],
+	"function":[],
+	"control":[]
+	}
 	for command in mcommands:
 		if command["type"] not in types:
 			command["type"] = "control"
@@ -47,7 +54,10 @@ def getcoms(message, commands):
 	for type in types:
 		value = ""
 		for comamnd in type:
-			value = value + command["name"] + "\n"
+			extra = ""
+			if command["admin"]:
+				extra = " 🟥 "
+			value = value + command["name"] + extra + "\n"
 		value = value[:len(value) - 1]
 		embed.add_field(name = type, value = value, inline = False)
 	embed.set_thumbnail(url = message.guild.me.avatar_url)
