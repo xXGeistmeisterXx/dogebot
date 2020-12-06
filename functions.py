@@ -66,7 +66,7 @@ def getcoms(message, commands):
 			value = value + command["name"] + extra + "\n"
 		value = value[:len(value) - 1]
 		embed.add_field(name = type, value = value, inline = False)
-	embed.set_thumbnail(url = message.guild.me.avatar_url)
+	embed.set_thumbnail(url = "https://imgur.com/mj3Knw0.png")
 	return embed
 
 def em(value):
