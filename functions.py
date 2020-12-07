@@ -189,3 +189,10 @@ def getinfo(message, commands):
 	else:
 		embed = discord.Embed(title = "command not found", color = discord.Color.from_rgb(209, 170, 88))
 	return embed
+
+
+def alphatwin():
+	embed = discord.Embed(title = "ALPHA TWIN", description= "calculating...", color = discord.Color.from_rgb(209, 170, 88))
+	embed.add_field(name = "the alpha twin is:", value = "BEN", inline = False)
+	embed.set_thumbnail(url = message.guild.get_member("367402730605641739").avatar_url)
+	return embed
