@@ -193,5 +193,5 @@ def getinfo(message, commands):
 
 def alphatwin(message):
 	embed = discord.Embed(title = "THE ALPHA TWIN IS...", description= "BEN", color = discord.Color.from_rgb(209, 170, 88))
-	embed.set_thumbnail(url = message.guild.get_member(367402730605641739).avatar_url)
+	embed.set_thumbnail(url = "https://imgur.com/0k6fYg0.png")
 	return embed
