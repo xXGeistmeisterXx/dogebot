@@ -75,7 +75,7 @@ def addadmin(conn, message, admins):
 	except:
 		return discord.Embed(title = "invalid id format", color = discord.Color.from_rgb(209, 170, 88))
 	if dcid in admins:
-		return discord.Embed(title = "id already exists", color = discord.Color.from_rgb(209, 170, 88))
+		return discord.Embed(title = "already admin", color = discord.Color.from_rgb(209, 170, 88))
 	sql.addadmin(conn, dcid)
 	return discord.Embed(title = "admin added", color = discord.Color.from_rgb(209, 170, 88))
 
@@ -86,9 +86,31 @@ def deleteadmin(conn, message, admins):
 	except:
 		return discord.Embed(title = "invalid id format", color = discord.Color.from_rgb(209, 170, 88))
 	if dcid not in admins:
-		return discord.Embed(title = "id does not exist", color = discord.Color.from_rgb(209, 170, 88))
+		return discord.Embed(title = "not admin", color = discord.Color.from_rgb(209, 170, 88))
 	sql.deleteadmin(conn, dcid)
 	return discord.Embed(title = "admin deleted", color = discord.Color.from_rgb(209, 170, 88))
+
+def addban(conn, message, bans):
+	dcid = 0
+	try:
+		dcid = int(message.content.split()[1])
+	except:
+		return discord.Embed(title = "invalid id format", color = discord.Color.from_rgb(209, 170, 88))
+	if dcid in bans:
+		return discord.Embed(title = "already banned", color = discord.Color.from_rgb(209, 170, 88))
+	sql.addban(conn, dcid)
+	return discord.Embed(title = "banned", color = discord.Color.from_rgb(209, 170, 88))
+
+def deleteban(conn, message, bans):
+	dcid = 0
+	try:
+		dcid = int(message.content.split()[1])
+	except:
+		return discord.Embed(title = "invalid id format", color = discord.Color.from_rgb(209, 170, 88))
+	if dcid not in bans:
+		return discord.Embed(title = "not banned", color = discord.Color.from_rgb(209, 170, 88))
+	sql.deleteban(conn, dcid)
+	return discord.Embed(title = "unbanned", color = discord.Color.from_rgb(209, 170, 88))
 
 def getstats(message, stats):
 	embed = discord.Embed(title = "stats", color = discord.Color.from_rgb(209, 170, 88))
