@@ -118,6 +118,18 @@ def deletecom(conn, id):
 	cur.execute(query)
 	conn.commit()
 
+def addadmin(conn, dcid):
+	cur = conn.cursor()
+	query = "INSERT INTO admins(dcid) VALUES ({})".format(dcid)
+	cur.execute(query)
+	conn.commit()
+
+def deleteadmin(conn, dcid):
+	cur = conn.cursor()
+	query = "DELETE FROM admins WHERE dcid={}".format(dcid)
+	cur.execute(query)
+	conn.commit()
+
 def updatemessages(conn, stats):
 	cur = conn.cursor()
 	cur.execute("UPDATE stats SET messages = {} WHERE rowid = 1;".format(stats["messagessen"]))
