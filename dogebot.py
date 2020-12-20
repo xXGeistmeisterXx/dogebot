@@ -87,7 +87,7 @@ async def on_message(message):
 
 			elif(com["type"] == "reaction"):
 
-				for emoji in com["content"]:
+				for emoji in com["content"].split(","):
 
 					await message.add_reaction(emoji)
 
