@@ -197,4 +197,4 @@ def alphatwin(message):
 	return embed
 
 def at(message):
-	await message.send("<@{}>".format(message.author.id))
+	return("<@{}>".format(message.author.id))
