@@ -89,6 +89,7 @@ async def on_message(message):
 
 				for emoji in com["content"].split(","):
 
+					print(emoji)
 					await message.add_reaction(emoji)
 
 			elif(com["type"] == "embed"):
