@@ -127,7 +127,7 @@ def getcoms(message, commands):
 	"reaction":[],
 	"file":[],
 	"embed":[],
-	"function":[],
+	"command":[],
 	"control":[]
 	}
 	for command in mcommands:
@@ -143,7 +143,7 @@ def getcoms(message, commands):
 			extra = ""
 			if command["admin"]:
 				extra = " 🟥 "
-			value = value + command["name"] + extra + "\n"
+			value = value + extra + command["name"] + "\n"
 		value = value[:len(value) - 1]
 		embed.add_field(name = type, value = value, inline = False)
 	embed.set_thumbnail(url = message.guild.me.avatar_url)
