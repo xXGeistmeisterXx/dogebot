@@ -15,6 +15,8 @@ def getconn():
 	dbcc = sql.cc(dbfile)
 	return dbcc
 
+dbcc = getconn()
+
 def log(content):
 		f = open("doge.log", "a")
 		now = time.strftime('%H:%M %m/%d/%Y')
@@ -122,6 +124,7 @@ async def on_message(message):
 
 			dbcc.close()
 
+dbcc.close()
 log("STARTED DOGEBOT")
 client.loop.create_task(setgame())
 client.run(token)
