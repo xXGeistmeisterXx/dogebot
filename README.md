@@ -1,2 +1,2 @@
 # dogebot
-silly discord bot with networking to allow for easy control
+silly discord bot with modular commands for easy managment
