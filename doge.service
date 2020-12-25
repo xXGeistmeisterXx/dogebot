@@ -1,0 +1,12 @@
+[Unit]
+Description=dogebot
+After=vboxadd.service vboxadd-service.service
+
+[Service]
+ExecStart=/opt/environments/doge/bin/python3 dogebot.py
+Restart=always
+User=tgeist
+WorkingDirectory=/opt/doge/dogebot
+
+[Install]
+WantedBy=multi-user.target
