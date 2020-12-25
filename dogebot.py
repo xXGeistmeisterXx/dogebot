@@ -10,7 +10,10 @@ import functions
 os.system("clear")
 
 dbfile = "db/doge.db"
-dbcc = sql.cc(dbfile)
+
+def getconn():
+	dbcc = sql.cc(dbfile)
+	return dbcc
 
 def log(content):
 		f = open("doge.log", "a")
@@ -73,6 +76,7 @@ async def on_message(message):
 
 		if(com):
 			now = time.strftime('%H:%M %m/%d/%Y')
+			dbcc = getconn()
 			log("(%s) %s activated %s" % (message.guild.name, message.author.name, com["name"]))
 			anummessent()
 
@@ -115,6 +119,8 @@ async def on_message(message):
 				bans = sql.getbans(dbcc)
 				results = functions.reload()
 				await message.channel.send(embed=results)
+
+			dbcc.close()
 
 log("STARTED DOGEBOT")
 client.loop.create_task(setgame())
