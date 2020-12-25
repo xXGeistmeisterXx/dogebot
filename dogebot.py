@@ -7,6 +7,8 @@ import sqlite3
 import sql
 import functions
 
+#comment
+
 os.system("clear")
 
 dbfile = "db/doge.db"
