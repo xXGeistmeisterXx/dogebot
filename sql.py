@@ -27,6 +27,8 @@ def getcommands(conn):
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM commands ORDER BY CASE WHEN type = 'embed' THEN 1 ELSE 2 END DESC, admin ASC, name ASC")
 	commands = cur.fetchall()
+	cur.execute("SELECT name FROM sqlite_master WHERE type='table'")
+	print(cur.fetchall())
 
 	final = []
 	nobj = {}
