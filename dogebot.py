@@ -7,8 +7,6 @@ import sqlite3
 import sql
 import functions
 
-#comment
-
 os.system("clear")
 
 dbfile = "db/doge.db"
@@ -20,19 +18,23 @@ def getconn():
 dbcc = getconn()
 
 def log(content):
-		f = open("doge.log", "a")
-		now = time.strftime('%H:%M %m/%d/%Y')
-		content = "[%s] %s\n" % (now, content)
-		f.write(content)
-		f.close()
+	f = open("doge.log", "a")
+	now = time.strftime('%H:%M %m/%d/%Y')
+	content = "[%s] %s\n" % (now, content)
+	f.write(content)
+	f.close()
 
 def anummessent():
+	dbcc = getconn()
 	stats["messagessen"] += 1
 	sql.updatemessages(dbcc, stats)
+	dbcc.close()
 
 def anumres():
+	dbcc = getconn()
 	stats["timesrestarted"] += 1
 	sql.updaterestarts(dbcc, stats)
+	dbcc.close()
 
 client = discord.Client()
 f = open("token.txt", "r")
