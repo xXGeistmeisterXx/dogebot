@@ -133,4 +133,4 @@ log("STARTED DOGEBOT")
 try:
 	client.run(token)
 finally:
-	client.logout()
+	await client.logout()
