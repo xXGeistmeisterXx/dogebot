@@ -51,7 +51,7 @@ anumres()
 async def setgame():
 	await client.wait_until_ready()
 	await client.change_presence(activity=discord.Game(name=game))
-	await setgame.close()
+	print(type(setgame))
 
 @client.event
 async def on_message(message):
