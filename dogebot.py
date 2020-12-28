@@ -48,10 +48,9 @@ game = sql.getstatus(dbcc)
 bans = sql.getbans(dbcc)
 anumres()
 
-async def setgame():
-	await client.wait_until_ready()
+@client_event
+async def on_ready():
 	await client.change_presence(activity=discord.Game(name=game))
-	print(type(setgame))
 
 @client.event
 async def on_message(message):
@@ -131,5 +130,4 @@ async def on_message(message):
 
 dbcc.close()
 log("STARTED DOGEBOT")
-client.loop.create_task(setgame())
 client.run(token)
