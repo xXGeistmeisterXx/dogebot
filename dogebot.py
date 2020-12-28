@@ -50,7 +50,7 @@ anumres()
 
 async def kill():
 	try:
-		await asyncio.sleep(1)
+		await asyncio.sleep(9999999999999999999)
 	finally:
 		await client.logout()
 
