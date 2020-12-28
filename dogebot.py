@@ -48,7 +48,7 @@ game = sql.getstatus(dbcc)
 bans = sql.getbans(dbcc)
 anumres()
 
-@client_event
+@client.event
 async def on_ready():
 	await client.change_presence(activity=discord.Game(name=game))
 
