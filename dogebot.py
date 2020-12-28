@@ -133,7 +133,5 @@ async def on_message(message):
 
 dbcc.close()
 log("STARTED DOGEBOT")
-try:
-	client.run(token)
-finally:
-	done(client)
+client.run(token)
+client.logout()
