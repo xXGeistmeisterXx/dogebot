@@ -130,5 +130,6 @@ async def on_message(message):
 
 dbcc.close()
 log("STARTED DOGEBOT")
-client.loop.create_task(setgame())
+#client.loop.create_task(setgame())
+client.run(setgame)
 client.run(token)
