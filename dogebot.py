@@ -51,6 +51,7 @@ anumres()
 async def setgame():
 	await client.wait_until_ready()
 	await client.change_presence(activity=discord.Game(name=game))
+	await setgame.close()
 
 @client.event
 async def on_message(message):
@@ -130,6 +131,5 @@ async def on_message(message):
 
 dbcc.close()
 log("STARTED DOGEBOT")
-client.loop.run_until_complete(setgame())
-print("im here")
+client.loop.create_task(setgame())
 client.run(token)
